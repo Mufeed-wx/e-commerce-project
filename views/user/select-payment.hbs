@@ -1,0 +1,185 @@
+<style>
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    /* Hide the default radio button */
+    .container input {
+
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* custom radio button */
+    .check {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: lightgray;
+        border-radius: 50%;
+    }
+
+    .container:hover input~.check {
+        background-color: gray;
+    }
+
+    .container input:checked~.check {
+        background-color: blue;
+    }
+
+    .check:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .container input:checked~.check:after {
+        display: block;
+    }
+
+    .container .check:after {
+        top: 5px;
+        left: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .deliver-to {
+        background-color: #f0c14b;
+        padding: 3px 35px 5px 35px;
+        border-radius: 4px;
+    }
+
+    .deliver-to-span {
+        font-size: 13px;
+        color: black;
+    }
+</style>
+
+
+
+<div class="container-fluid bg-light bg-icon mb-5">
+    <div class="container">
+        <div class='row row-mai  d-flex justify-content-center mt-0 align-items-center h-100'>
+            <div class='col col-lg-12 mt-3 mb-5 mb-lg-0'>
+                <div class='card mb-3' style='border-radius: .5rem;padding: 40px 38px;border-radius: 0px;'>
+                    <form action="/selectpayment" method="post">
+                        <div class='row g-0'>
+                            <div class='col-md-12'>
+                                <div class='card-body pl-2'>
+                                    <h1 class="address-head">Select a payment method</h1>
+                                    <hr class='mt-0 mb-4' />
+                                    <div class='row pt-1'>
+                                        <fieldset id="paymentmethod">
+                                            <label class="container p-0">
+                                                <label class="container">Cash on delivery
+                                                    <input type="radio" name="paymentmethod" value="COD">
+                                                    <span class="check"></span>
+                                                </label>
+                                                {{!-- <label class="container">Pay with Debit/Credit/ATM Cards
+                                                    <input type="radio" name="paymentmethod" value="CARD">
+                                                    <span class="check"></span>
+                                                </label> --}}
+                                                {{!-- <label class="container">Net Banking
+                                                    <input type="radio" name="paymentmethod" value="Razorpay">
+                                                    <span class="check"></span>
+                                                </label> --}}
+                                                <label class="container">Online payment
+                                                    <input type="radio" name="paymentmethod" value="Razorpay">
+                                                    <span class="check"></span>
+                                                </label>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-12 mb-3 justify-content-start'>
+                                <div class="pt-3 text-center">
+                                    <button type="submit" class="btn deliver-to"><span
+                                            class="deliver-to-span">Continue</span></button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+  <!-- Footer -->
+  <footer
+          class="text-center text-lg-start text-white"
+          style="background-color: #000000"
+          >
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 text-white font-weight-bold">
+              Company name
+            </h6>
+            <p> 
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold text-white">Products</h6>
+            <p>
+              <a class="text-white">MDBootstrap</a>
+            </p>
+            <p>
+              <a class="text-white">MDWordPress</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold text-white">Contact</h6>
+            <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+            <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+          </div>
+          <!-- Grid column -->
+
+
+          
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+
+  </footer>
+  <!-- Footer -->
+</div>
+<!-- End of .container -->
+  </div>
+</div>
+<!-- Footer End -->

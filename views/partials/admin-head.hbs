@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/admin/fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="/admin/css/owl.carousel.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/admin/css/bootstrap.min.css">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="/admin/css/style.css">
+  <link rel="stylesheet" href="/stylesheets/flyexpo.css">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <aside class="sidebar">
+    <div class="toggle">
+      <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span></span>
+      </a>
+    </div>
+    <div class="side-inner">
+
+      <div class="logo-wrap">
+        <div class="logo">
+          <span>C</span>
+        </div>
+        <span class="logo-text">Colorlib</span>
+      </div>
+      {{!-- TO DO --}}
+      {{!-- <div class="search-form">
+        <form action="#">
+          <span class="wrap-icon">
+            <span class="icon-search2"></span>
+          </span>
+          <input type="text" class="form-control" placeholder="Search...">
+        </form>
+      </div> --}}
+      <div class="nav-menu">
+        <ul>
+          <li class="active"><a href="/admin" class="d-flex align-items-center"><span
+                class="wrap-icon icon-home2 mr-3"></span><span class="menu-text" style="color:black;">Home</span></a>
+          </li>
+          <li>
+            <div class="btn-group">
+
+              <a type="button" class="btn   align-items-center  dropdown-toggle" data-bs-toggle="dropdown"
+                style="color: black;"><span class="wrap-icon icon-apple mr-2"></span><span class="menu-text"
+                  aria-expanded="false" style="color: rgb(0, 0, 0);" ;>Products</span></a>
+              <div class="dropdown-menu">
+                <a href="/admin/Manage_Product" class="dropdown-item">Manage Products</a>
+                <a href="/admin/Manage_Category" class="dropdown-item">Manage Categories</a>
+                <a href="#" class="dropdown-item"></a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="btn-group">
+
+              <a type="button" class="btn   align-items-center  dropdown-toggle" data-bs-toggle="dropdown"
+                style="color: black;"><span class="wrap-icon icon-user mr-2"></span><span class="menu-text"
+                  aria-expanded="false" style="color: rgb(0, 0, 0);" ;>User</span></a>
+              <div class="dropdown-menu">
+                <a href="/admin/view_user" class="dropdown-item">Manage user</a>
+                <a href="/admin/coupen" class="dropdown-item">Manage Coupen</a>
+                <a href="/admin/Manage_userHome" class="dropdown-item">Manage Carousel</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="btn-group">
+
+              <a type="button" class="btn   align-items-center  dropdown-toggle" data-bs-toggle="dropdown"
+                style="color: black;"><span class="wrap-icon icon-shopping-bag mr-2"></span><span class="menu-text"
+                  aria-expanded="false" style="color: rgb(0, 0, 0);" ;>Orders</span></a>
+              <div class="dropdown-menu">
+                <a href="/admin/orders" class="dropdown-item">Manage order</a>
+                <a href="/admin/salesreport" class="dropdown-item">Manage salesreport</a>
+              </div>
+            </div>
+          </li>
+          <li><a style="color: black;" onclick="logoutAdmin()" class="d-flex align-items-center"><span
+                class="wrap-icon icon-cog mr-3"></span><span class="menu-text">Logout</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+  </aside>
+  <style>
+    aside .side-inner .nav-menu ul li a {
+      display: block;
+      padding-left: 23px;
+      padding-right: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      color: #060000;
+      position: relative;
+      -webkit-transition: .3s all ease;
+      -o-transition: .3s all ease;
+      transition: .3s all ease;
+    }
+  </style>
+</body>
+<script src="/javascripts/userManagement.js"></script>
+<script src="/admin/js/jquery-3.3.1.min.js"></script>
+{{!--
+<script src="/admin/js/modal_product.js"></script> --}}
+<script src="/admin/js/popper.min.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js">
+</script>
+<script src="/javascripts/userManagement.js"></script>
+
+</html>

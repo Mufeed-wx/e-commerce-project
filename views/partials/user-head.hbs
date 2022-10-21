@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!--form validation -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    {{!-- Own stylesheet --}}
+
+    <link rel="stylesheet" href="/stylesheets/fly-expo-user.css">
+
+    {{!-- profile --}}
+
+    <link href="/stylesheets/profilepage.css" rel="stylesheet">
+    <link href="/stylesheets/cartlist.css" rel="stylesheet">
+    <link href="/stylesheets/wishlist.css" rel="stylesheet">
+    {{!-- end --}}
+
+    <!------- Jquery    ------>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=YOUR_APIKEY&sensor=false">
+    </script>
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <style>
+        .modal-content {
+            border-radius: 0.7rem;
+        }
+
+        .main-in {
+            border-radius: 4px;
+        }
+
+        .text-danger {
+            font-size: 13px;
+        }
+    </style>
+    {{!-- <div id="mylogin" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Welcome</h3>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="" class="form-label required">Enter Your Email</label>
+                            <input type="email" id="emailin" onkeyup="validateEmailSign()"
+                                class="form-control form-control-lg" placeholder="" name="User_Email" />
+                            <span id="email-error" class="text-danger font-weight-bold"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label required">Password</label>
+                            <input type="password" id="passwordin" onkeyup="validatePasswordsign()"
+                                class="form-control form-control-lg" placeholder="" name="Password" />
+                            <span id="pass-error" class="text-danger font-weight-bold"></span>
+                            <span id="submit-error" class="text-danger font-weight-bold"></span>
+                        </div>
+                        <p class="text-danger " id="usernotfound" style="font-size: 13px;"></p>
+
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <div class=""> <a class="btn btn-primary main-in" onclick="loginsubmit()">Login</a></div>
+                </div>
+                </form>
+                <div class="text-center text-lg-start mtb4 pt-2 ms-3">
+                    <p class="small fw-bold  mb-4">Don't have an account? <a href="/signup"
+                            class="link-danger">Register</a></p>
+                </div>
+            </div>
+        </div> --}}
+        {{!--
+    </div> --}}
+    <div id="logoutmodal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> --}}
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h1>YOU NEED TO LOGOUT</h1>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="/logout" onclick="return logout()"><button class="btn btn-secondary"
+                            type="submit">Logout</button></a>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+        <a href="\" class="navbar-brand ms-4 ms-lg-0">
+            <h1 class="fw-bold nav-h1 text-primary m-0">FLY<span class="text-secondary">EXP</span>O</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="\" class="nav-item nav-link active">Home</a>
+                <a href="\product" class="nav-item nav-link">Products</a>
+                <div class="nav-item dropdown">
+                </div>
+                <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+            </div>
+            <div class=" d-lg-flex ms-2">
+                {{!-- <a class="btn-sm-square bg-white rounded-circle ms-5" href="">
+                    <small class="fa fa-search text-body "></small>
+                </a> --}}
+                <a class="btn-sm-square bg-white rounded-circle ms-5" href="/Wishlist">
+                    <small class="fa fa-heart text-body "></small>
+                </a>
+                <a class="btn-sm-square bg-white rounded-circle ms-3" href="/cart">
+                    <small class="fa fa-shopping-bag text-body"></small>
+                </a>
+
+            </div>
+            {{#if session.user.User_status}}
+            <div class="nav-item dropdown">
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a href="/viewprofile" class="dropdown-item">My Profile</a>
+
+                    <a href="/myorders" class="dropdown-item">My orders</a>
+                    <a href="" class="dropdown-item">Settings</a>
+                    <a class="dropdown-item" onclick="return logout()">Log
+                        Out</a>
+                </div>
+
+
+                <a class="btn-sm-square bg-white rounded-circle ms-3">
+                    <small class="fa fa-user text-body "></small>
+
+                </a>
+            </div>
+
+            {{else}}
+            <a href="/login" class="btn-sm-square  bg-white rounded-circle ms-3" type="button" style="outline:none ;">
+                <small class="fa fa-user text-body"></small>
+            </a>{{/if}}
+        </div>
+        </div>
+    </nav>
+    </div>
+    <!-- Navbar End -->
+</body>
+
+
+
+<!-- JavaScript Libraries -->
+{{!--
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+
+
+
+</html>

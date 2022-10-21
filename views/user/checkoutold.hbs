@@ -1,0 +1,263 @@
+<style>
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    /* Hide the default radio button */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* custom radio button */
+    .check {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: lightgray;
+        border-radius: 50%;
+    }
+
+    .container:hover input~.check {
+        background-color: gray;
+    }
+
+    .container input:checked~.check {
+        background-color: blue;
+    }
+
+    .check:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .container input:checked~.check:after {
+        display: block;
+    }
+
+    .container .check:after {
+        top: 5px;
+        left: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .coupen-in {
+        width: 150px;
+        height: 30px;
+        background-color: white;
+    }
+
+        {
+            {
+             !-- .coupen-main {
+                padding: 20px;
+            }
+
+            --
+        }
+    }
+
+    .coupen-tesxt {
+        padding: 20px;
+        font-size: 15px;
+    }
+
+    .apply-coupen {
+        height: 30px;
+        border-radius: 4px;
+        font-size: 15px;
+    }
+
+    .apply-coupen :hover {
+        color: black;
+    }
+</style>
+<div class="container-fluid bg-light bg-icon mb-5">
+    <div class='row row-mai  d-flex justify-content-center mt-0 align-items-center h-100'>
+        <div class='col col-lg-12 mt-3 mb-5 mb-lg-0'>
+            <div class='card mb-3' style='border-radius: .5rem;padding: 40px 38px;border-radius: 0px;'>
+                <div class="row g-0">
+                    <div class='col-md-6'>
+                        <div class='card-body pl-2'>
+                            <h6>Select your delivery address</h6>
+                            <hr class='mt-0 mb-4' />
+                            <div class="ps-4 ">
+                                <div class="nav justify-content-start tblData"
+                                    style="overflow-y:scroll; height: 210px;width: 400px;padding: 20px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.65), 0 2px 6px 0 rgb(206 206 238 / 54%);">
+                                    <fieldset id="group2">
+                                        <label class="container">
+                                            <div>
+                                                <h6 class="m-0">Mr Ahmed Al Wasl</h6>
+                                            </div>
+                                            <div><span class="address-text">Lulu-hyper</span></div>
+                                            <div><span class="address-text">albujaija</span></div>
+                                            <div><span class="address-text">PO Box:12345</span></div>
+                                            <div><span class="address-text">Dubai</span></div>
+                                            <div><span class="address-text">UAE</span></div>
+                                            <div class="mt-3"><a href="/edituseraddress" class="addres-edits-a"><span
+                                                        class="addres-edits">Edit</span></a><span
+                                                    class="address-text p-3">|</span><a class="addres-edits-a"
+                                                    href=""><span class="addres-edits">Remove</span></a></div>
+                                            <input type="radio" name="group2" value="value1" checked>
+                                            <span class="check"></span>
+                                        </label>
+                                        <label class="container">OBC
+                                            <input type="radio" name="group2" value="value1">
+                                            <span class="check"></span>
+                                        </label>
+                                        <label class="container">SC
+                                            <input type="radio" name="group2" value="value1">
+                                            <span class="check"></span>
+                                        </label>
+                                        <label class="container">ST
+                                            <input type="radio" name="group2" value="value1">
+                                            <span class="check"></span>
+                                        </label>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class='col-md-6'>
+                        <div class='card-body pl-2'>
+                            <h6>Selelct payment method</h6>
+                            <hr class='mt-0 mb-4' />
+                            <div class="ps-4 ">
+                                <div class="nav justify-content-start"
+                                    style=" height: 210px;width: 400px;padding: 20px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.65), 0 2px 6px 0 rgb(206 206 238 / 54%);">
+                                    <fieldset id="group1">
+                                        <label class="container p-0">
+                                            <label class="container">Cash on delivery
+                                                <input type="radio" name="group1" value="value1">
+                                                <span class="check"></span>
+                                            </label>
+                                            <label class="container">Pay with Debit/Credit/ATM Cards
+                                                <input type="radio" name="group1" value="value2">
+                                                <span class="check"></span>
+                                            </label>
+                                            <label class="container">Net Banking
+                                                <input type="radio" name="group1" value="value3">
+                                                <span class="check"></span>
+                                            </label>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <hr class='mt-0 mt-4' />
+                <div class='row g-0 p-4'>
+                    <div class='col-md-4 gradient-custom text-center text-white'
+                        style='border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;height: 250px;'>
+                        <h5 class="coupen-tesxt">Gift cards, Voucher & Promotional codes</h5>
+                        <div class="coupen-main">
+                            <input class="coupen-in" type="text" name="" id="">
+                            <span class="apply-coupen"><button class="border-0 apply-coupen">Apply</button></span>
+                        </div>
+                    </div>
+
+                    <div class='col-md-8 border-1' style="border: 10px;">
+                        <div class='card-body pl-2'>
+                            <h6>Information</h6>
+                            <hr class='mt-0 mb-4' />
+                            <div class='row pt-1'>
+                                <div class='col-6 mb-3'>
+                                    <h6>Email</h6>
+                                    <p class='text-muted'>{{session.user.User_Email}}</p>
+                                </div>
+                                <div class='col-6 mb-3'>
+                                    <h6>Phone</h6>
+                                    <p class='text-muted'>{{session.user.Mobile_Number}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer Start -->
+<div class='container-fluid bg-dark footer mt-5 pt-5 wow fadeIn' data-wow-delay='0.1s'>
+    <div class='container py-5'>
+        <div class='row g-5'>
+            <div class='col-lg-3 col-md-6'>
+                <h1 class='fw-bold text-primary mb-4'>F<span class='text-secondary'>oo</span>dy</h1>
+                <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat
+                    ipsum et lorem et sit, sed stet lorem sit clita</p>
+                <div class='d-flex pt-2'>
+                    <a class='btn btn-square btn-outline-light rounded-circle me-1' href=''><i
+                            class='fab fa-twitter'></i></a>
+                    <a class='btn btn-square btn-outline-light rounded-circle me-1' href=''><i
+                            class='fab fa-facebook-f'></i></a>
+                    <a class='btn btn-square btn-outline-light rounded-circle me-1' href=''><i
+                            class='fab fa-youtube'></i></a>
+                    <a class='btn btn-square btn-outline-light rounded-circle me-0' href=''><i
+                            class='fab fa-linkedin-in'></i></a>
+                </div>
+            </div>
+            <div class='col-lg-3 col-md-6'>
+                <h4 class='text-light mb-4'>Address</h4>
+                <p><i class='fa fa-map-marker-alt me-3'></i>123 Street, New York, USA</p>
+                <p><i class='fa fa-phone-alt me-3'></i>+012 345 67890</p>
+                <p><i class='fa fa-envelope me-3'></i>info@example.com</p>
+            </div>
+            <div class='col-lg-3 col-md-6'>
+                <h4 class='text-light mb-4'>Quick Links</h4>
+                <a class='btn btn-link' href=''>About Us</a>
+                <a class='btn btn-link' href=''>Contact Us</a>
+                <a class='btn btn-link' href=''>Our Services</a>
+                <a class='btn btn-link' href=''>Terms & Condition</a>
+                <a class='btn btn-link' href=''>Support</a>
+            </div>
+            <div class='col-lg-3 col-md-6'>
+                <h4 class='text-light mb-4'>Newsletter</h4>
+                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                <div class='position-relative mx-auto' style='max-width: 400px;'>
+                    <input class='form-control bg-transparent w-100 py-3 ps-4 pe-5' type='text'
+                        placeholder='Your email' />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='container-fluid copyright'>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-md-6 text-center text-md-start mb-3 mb-md-0'>
+                    &copy;
+                    <a href='#'>Your Site Name</a>, All Right Reserved.
+                </div>
+                <div class='col-md-6 text-center text-md-end'>
+                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                    Designed By
+                    <a href='https://htmlcodex.com'>HTML Codex</a>
+                    <br />Distributed By:
+                    <a href='https://themewagon.com' target='_blank'>ThemeWagon</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+<!-- Back to Top -->
+<a href='#' class='btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top'><i class='bi bi-arrow-up'></i></a>

@@ -1,0 +1,119 @@
+<div class="container-fluid bg-light bg-icon mb-5">
+    <div class="container">
+        <div class='row row-mai  d-flex justify-content-center mt-0 align-items-center h-100'>
+            <div class='col col-lg-12 mt-3 mb-5 mb-lg-0' id="address-data">
+                <div class='card mb-3' style='border-radius: .5rem;padding: 40px 38px;border-radius: 0px;'>
+                    <div class='row '>
+                        <h1 class="address-head">Your Addresses</h1>
+                        <hr class='mt-0 mt-4' />
+                        <div class="row row-cols-2 row-cols-lg-3 mt-4  row-cols-xl-3"
+                            style="    margin-left: calc(var(--bs-gutter-x) / -4);padding-right: calc(var(--bs-gutter-x) / 0.);">
+                            <div class=' mb-3 card-acc-list pb-2'>
+                                <div class="ya-card-cell">
+                                    <a href="/adduseraddress">
+                                        <div class="add-address">
+                                            <div>
+                                                <h6 class="add-address-plus m-0">+</h6>
+                                            </div>
+                                            <div>
+                                                <h6 class="">Add Address</h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            {{#each userAddress}}
+                            <div class=' mb-3 card-acc-list pb-2'>
+                                <div class="ya-card-cell">
+                                    <h6 class="pt-2 m-0">Mr {{this.name}}</h6>
+                                    <div><span class="address-text">Lulu-hyper</span></div>
+                                    <div><span class="address-text">{{this.street}}</span></div>
+                                    <div><span class="address-text">Po:{{this.pincode}}</span></div>
+                                    <div><span class="address-text">{{this.country}}</span></div>
+                                    <div><span class="address-text">{{this.state}}</span></div>
+                                    <div class="mt-3"><a href="/edituseraddress/{{this._id}}" class="addres-edits-a"><span
+                                                class="addres-edits">Edit</span></a><span
+                                            class="address-text p-3">|</span><a class="addres-edits-a" data-id="{{this._id}}" id="delete-address"
+								onclick="deleteaddress(this);" ><span
+                                                class="addres-edits">Remove</span></a></div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+  <!-- Footer -->
+  <footer
+          class="text-center text-lg-start text-white"
+          style="background-color: #000000"
+          >
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 text-white font-weight-bold">
+              Company name
+            </h6>
+            <p> 
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold text-white">Products</h6>
+            <p>
+              <a class="text-white">MDBootstrap</a>
+            </p>
+            <p>
+              <a class="text-white">MDWordPress</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold text-white">Contact</h6>
+            <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+            <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+          </div>
+          <!-- Grid column -->
+
+
+          
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+
+  </footer>
+  <!-- Footer -->
+</div>
+<!-- End of .container -->
+  </div>
+</div>
+<!-- Footer End -->
+
+<!-- Back to Top -->
+<a href='#' class='btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top'><i class='bi bi-arrow-up'></i></a>

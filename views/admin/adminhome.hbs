@@ -1,0 +1,207 @@
+<style>
+  .chart-container {
+    width: 50%;
+    height: 50%;
+
+  }
+
+  p {
+    color: rgb(255, 254, 254);
+    font-size: 15px;
+  }
+
+  .das-g {
+    padding-top: 15px;
+    display: flex;
+    width: 500px;
+  }
+
+  .chart-container {
+    width: 50%;
+    height: 100%;
+  }
+
+  main .post-entry {
+    margin-bottom: 0px;
+  }
+</style>
+
+<body>
+
+  <main>
+
+    <div class="container" style="padding-right: 0px;max-width: 1067px;">
+      <div class="row justify-content-end">
+        <div class="col-md-11">
+          <div class="row mt-3">
+            <div class="container-fluid pt-4 px-4">
+              <div class="row">
+                <div class="col-sm-6  col-lg-3 col-xl-3">
+                  <div class=" rounded d-flex align-items-center justify-content-between p-4"
+                    style="background-color: #007bff;">
+                    <i class="fa fa-chart-line fa-3x text-black"></i>
+                    <div class="ms-1">
+                      <p class="mb-2">Today Sale</p>
+                      <h6 class="mb-0">${{data.todaySale}}</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 col-xl-3">
+                  <div class="bg-primary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-bar fa-3x text-black"></i>
+                    <div class="ms-3">
+                      <p class="mb-2">Total Sale</p>
+                      <h6 class="mb-0">${{data.totalSale}}</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 col-xl-3">
+                  <div class="bg-primary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-area fa-3x text-black"></i>
+                    <div class="ms-3">
+                      <p class="mb-2">Today Revenue</p>
+                      <h6 class="mb-0">${{data.todayRevenue}}</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 col-xl-3">
+                  <div class="bg-primary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-pie fa-3x text-black"></i>
+                    <div class="ms-3">
+                      <p class="mb-2">Total Revenue</p>
+                      <h6 class="mb-0">${{data.totalRevenue}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-lg-12 das-g">
+              <div class="card chart-container">
+                <canvas id="chart"></canvas>
+              </div>
+              <div class="card chart-container">
+                <div pt-2 id="piechart_3d" style=" background-color: #6C7293;"> </div>
+              </div>
+            </div>
+            <div class="col-lg-12 das-g">
+
+            </div>
+          </div>
+          <div class="row">
+            <div pt-2 id="piechart_3d" style=" background-color: #6C7293;"> </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center pb-5 mt-3">
+          <div class="d-flex post-entry">
+            <div style="background-color: #007bff;width: 400px;height: 100%;">
+              <div class="d-flex post-entry">
+                <table id="example" class='table display  table-active table-striped table-light table-hover  mt-2'
+                  style='width:100%'>
+                  <thead>
+                    <tr>
+                      <th>Total Customers</th>
+                      <th>{{data.totalUsers}}</th>
+                    </tr>
+                    <tr class="table-warning">
+                      <th>Company Products</th>
+                      <th>{{data.totalProducts}}</th>
+                    </tr>
+                    <tr>
+                      <th>Total CashOnDelivery</th>
+                      <th>{{data.CODCount}}</th>
+                    </tr>
+                    <tr class="table-warning">
+                      <th>Total OnlinePayment</th>
+                      <th>{{data.onlinePaymentCount}}</th>
+                    </tr>
+                    <tr>
+                      <th>Total Pending Orders</th>
+                      <th>{{data.totalPendingOrders}}</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+
+  <!-- Sales Chart End -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['Delivered', {{ data.totalDelivered }}],
+    ['Placed', {{ data.totalPlaced }}],
+      ['Shipped', {{ data.totalShipped }}],
+      ['Cancelled', {{ data.totalCancelled }}],
+        
+                                    ]);
+
+    var options = {
+
+      is3D: true,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
+      }
+  </script>
+
+  </div>
+</body>
+
+
+<script>
+
+  const ctx = document.getElementById("chart").getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ["{{data.dateList.[0]}}", "{{data.dateList.[1]}}", "{{data.dateList.[2]}}",
+        "{{data.dateList.[3]}}", "{{data.dateList.[4]}}", "{{data.dateList.[5]}}", "{{data.dateList.[6]}}", "{{data.dateList.[7]}}", "{{data.dateList.[8]}}", "{{data.dateList.[9]}}"],
+      datasets: [{
+        label: 'Last Days',
+        backgroundColor: 'rgba(161, 198, 247, 1)',
+        borderColor: 'rgb(47, 128, 237)',
+        data: [{{ data.dateSales.[0] }}, {{ data.dateSales.[1] }}, {{ data.dateSales.[2] }}, 400, {{ data.dateSales.[3] }}],
+  }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+        }
+      }]
+    }
+  },
+  });
+</script>
+<script>
+  const ctxc = document.getElementById("doughnutchart").getContext('2d');
+  const myDoughnutChart = new Chart(ctxc, {
+    type: 'doughnut',
+    data: {
+      labels: ["Placed", "Packed", "Shipped", "Delivered", "Cancelled"],
+      datasets: [{
+        label: 'food Items',
+        data: [30, {{ data.totalShipped }}, {{ data.totalDelivered }}, {{ data.totalCancelled }}],
+  backgroundColor: [
+    "#FF851B", "#B10DC9", "#FFDC00",
+    "#001f3f", "#AAAAAA"]
+  }]
+  },
+  });
+
+</script>

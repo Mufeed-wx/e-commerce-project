@@ -1,0 +1,370 @@
+<style>
+    .alert-main {
+        height: 70px;
+        padding: 10px 0px 10px 10px;
+        border-style: ridge;
+    }
+
+    .fas-icon-alert {
+        padding: 10px;
+    }
+
+    .alert-text {
+        font-family: Noto Sans, sans-serif;
+        font-weight: normal;
+        font-size: 13px;
+    }
+
+    .coupen {
+        padding: 0px 20px 0px 0px;
+    }
+
+    .coupen-text {
+        font-size: 13px;
+    }
+
+    .coupen-in {
+        padding: 0px 0px 0px 0px;
+        width: 150px;
+        margin-top: 8px;
+        border-radius: 1px;
+        border: 1px solid #352a2a;
+        background-color: white;
+    }
+
+    .coupen-apply-a {
+        padding: 0px 0px 0px 5px;
+        width: 50px;
+        margin-top: 8px;
+        margin-left: 4px;
+        border-radius: 3px;
+        border: 1px solid #352a2a;
+        background-color: #f3eddd;
+        font-size: 12px;
+    }
+
+    .coupen-apply-span {
+        color: black;
+    }
+
+    .deliver-to {
+        background-color: #f0c14b;
+        padding: 3px 65px 5px 65px;
+        border-radius: 4px;
+    }
+
+    .deliver-to-modal {
+        background-color: #f0c14b;
+        padding: 3px 35px 5px 35px;
+        border-radius: 4px;
+    }
+
+    .deliver-to-span {
+        font-size: 13px;
+        color: black;
+    }
+
+    .order-summery-main {
+        padding-top: 10px;
+    }
+
+    .order-summery-text {
+        font-family: Noto Sans, sans-serif;
+        font-weight: bold;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .final-data {
+        font-size: 13px;
+    }
+
+    .final-data-value {
+        font-size: 13px;
+    }
+
+    .final-data-total {
+        font-size: 13px;
+    }
+
+    .final-data-value-total {
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container-fluid bg-light bg-icon mb-5">
+    <div class="container">
+        <div class='row row-mai  d-flex justify-content-center mt-0 align-items-center h-100'>
+            <div class='col col-lg-12 mt-3 mb-5 mb-lg-0'>
+                <div class='card mb-3' style='border-radius: .5rem;padding: 40px 38px;border-radius: 0px;'>
+                    <div class='row g-0'>
+                        <div class='col-md-12 '>
+                            <h1 class="address-head">Review your order</h1>
+                        </div>
+                    </div>
+                    <div class='row g-0 pb-2'>
+                        <div class='col-md-12 '>
+                            <div class="alert-main">
+                                <div style="display:flex ;">
+                                    <div><i class="fas fas-icon-alert fa-exclamation-triangle"></i></div>
+                                    <div>
+                                        <h5 class="m-0">Imporetent message</h5>
+                                        <div style="display: flex;">
+                                            <input class="m-0 text-start p-0" type="checkbox" style="width: 7%;">
+                                            <h6 class="alert-text ps-2 pt-2 ">Check final submitt </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='row g-0'>
+                        <div class='col-md-8  '
+                            style='border-top-left-radius: .0rem; display: flex; border-bottom-left-radius: .5rem;border-style: ridge;'>
+                            <div class='col-md-6 '>
+                                <div class=' mb-3 card-acc-list pb-2 border-0'>
+                                    <div class="ya-card-cell ">
+                                        <h6 class="pt-2 m-0">Shipping address</h6>
+                                        <h6 class="pt-2 m-0">Mr:{{orderAddress.name}}</h6>
+                                        <div><span class="address-text">Lulu-hyper</span></div>
+                                        <div><span class="address-text">{{orderAddress.street}}</span></div>
+                                        <div><span class="address-text">PO:{{orderAddress.pincode:}}</span></div>
+                                        <div><span class="address-text">{{orderAddress.country}}</span></div>
+                                        <div><span class="address-text">{{orderAddress.state}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-md-6  '>
+                                <div class=' mb-3 card-acc-list pb-2 border-0'>
+                                    <div class="ya-card-cell ">
+                                        <h6 class="pt-2 m-0">Payment method</h6>
+                                        {{#ifEquals paymentMethod 'COD'}}<h6 class="pt-2 m-0">Cash on delivery</h6>
+                                        {{/ifEquals}}
+                                        {{#ifEquals paymentMethod 'Razorpay'}}<h6 class="pt-2 m-0">Online Payment
+                                           </h6>{{/ifEquals}}  
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class=' mb-3 card-acc-list pb-2 border-0'>
+                                        <div class="ya-card-cell input_promotion">
+                                            <h6 class="coupen-text pt-2 m-0 ">PGift cards, Voucher & Promotional codes
+                                            </h6>
+                                            <div class="input_promotion" style="display: flex;"><input class="coupen-in"
+                                                    id="coupen-apply" name="applyCoupen" type="text"><button
+                                                    onclick="coupenApply();" class="coupen-apply-a"><span
+                                                        class="coupen-apply-span">Apply</span></button>
+                                            </div>
+                                        </div>
+                                        <div class="ya-card-cell promotion_applied" style="display: none;">
+                                            <div>
+                                                <h6 class="coupen-text pt-2 m-0 ">PGift cards, Voucher & Promotional
+                                                    codes applied
+                                                </h6>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md-4'>
+                            <div class='card-body pl-2' style="border-style: ridge;margin-left: 6px;">
+                                <div class="">
+                                    <a class="btn deliver-to" onclick="placeordermodal();"><span class="deliver-to-span">Place
+                                            your
+                                            order</span></a>
+                                </div>
+
+                                <div class="order-summery-main">
+                                    <h6 class="order-summery-text"> Order Summery</h6>
+                                    <div class="col-12" style="display: flex;">
+                                        <div class="col-8" style=""><span class="final-data">Items:</span></div>
+                                        <div class="col-4"></span><span class="final-data-value">$121</span></div>
+                                    </div>
+                                    <div class="col-12" style="display: flex;">
+                                        <div class="col-8" style=""><span class="final-data">Delivery:</span></div>
+                                        <div class="col-4"></span><span class="final-data-value">$21</span></div>
+                                    </div>
+                                    <div class="col-12" style="display: flex;">
+                                        <div class="col-8" style=""><span class="final-data">Total:</span></div>
+                                        <div class="col-4"></span><span class="final-data-value"
+                                                id="total_old">${{session.totalAmount.total}}</span></div>
+                                    </div>
+                                    <div class="col-12 " style="display: flex;" id="">
+                                        <div class="col-8 promotion"><span class="final-data">Promotion Applied</span>
+                                        </div>
+                                        <div class="col-4 promotion"></span><span class="final-data-value">$</span><span
+                                                class="final-data-value" id="applied">0</span></div>
+                                    </div>
+                                    <div class="col-12 mt-3" style="display: flex;">
+                                        <div class="col-8" style=""><span class="final-data-value-total">Order
+                                                Total</span>
+                                        </div>
+                                        <div class="col-4"></span><span class="final-data-value-total">$</span><span
+                                                class="final-data-value-total"
+                                                id="total-prize">{{session.totalAmount.total}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class='mt-0 mt-4' />
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+{{!-- MODAL --}}
+<div class="container d-flex justify-content-center modal-main mt-100">
+
+    <!-- Button to Open the Modal -->
+    {{!-- <button type="button" class="btn openmodal" data-toggle="modal" data-target="#modal1">
+        Click here
+    </button> --}}
+
+    <!-- The Modal -->
+    <div class="modal fade" id="place_order">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title">Confirm your order</h6>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="m-body">
+                        <h6 class="order-summery-text"> Order Summery</h6>
+                        {{!-- <div class="col-12" style="display: flex;">
+                            <div class="col-8" style=""><span class="final-data">Items:</span></div>
+                            <div class="col-4"></span><span class="final-data-value">$121</span></div>
+                        </div>
+                        <div class="col-12" style="display: flex;">
+                            <div class="col-8" style=""><span class="final-data">Delivery:</span></div>
+                            <div class="col-4"></span><span class="final-data-value">$21</span></div>
+                        </div> --}}
+                        <div class="col-12" style="display: flex;">
+                            <div class="col-8" style=""><span class="final-data">Total:</span></div>
+                            <div class="col-4"></span><span class="final-data-value">$</span><span
+                                    class="final-data-value" id="total_old_modal"></span>
+                            </div>
+                        </div>
+                        <div class="col-12" style="display: flex;">
+                            <div class="col-8" style=""><span class="final-data">Promotion Applied</span>
+                            </div>
+                            <div class="col-4"></span><span class="final-data-value">$</span><span
+                                    class="final-data-value" id="applie_modal"></span></div>
+                        </div>
+                        <div class="col-12 mt-3" style="display: flex;">
+                            <div class="col-8" style=""><span class="final-data-value-total">Order Total</span>
+                            </div>
+                            <div class="col-4"></span><span class="final-data-value-total">$</span><span
+                                    class="final-data-value-total" id="total_prize_modal"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button onclick="checkoutfinal()" class="deliver-to-modal"><span class="deliver-to-span">Place
+                                your
+                                order</span></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        * {
+            outline: none;
+        }
+
+        @font-face {
+            font-family: Roboto;
+            src: url('https://res.cloudinary.com/dxfq3iotg/raw/upload/v1585021315/Roboto-Regular.ttf');
+        }
+
+
+
+        .modal-main {
+            margin-top: 150px;
+        }
+
+        .modal-content {
+            border-radius: 0.7rem;
+        }
+
+
+
+        . .h4-modal {
+            margin-left: auto;
+        }
+
+        .modal-header {
+            border-bottom: none;
+            text-align: center;
+            padding-bottom: 0;
+        }
+
+        .h4-modal {
+
+            margin-top: 2vh;
+            margin-bottom: 0;
+            font-size: 2vh;
+        }
+
+        .modal-body {
+            padding: 20px, 0px, 0px, 40px;
+        }
+
+        .modal-footer {
+            border-top: none;
+            justify-content: center;
+            padding-top: 0;
+        }
+
+        .row {
+
+            padding: 2vh 0 2vh 0;
+            justify-content: space-between;
+            flex-wrap: unset;
+            margin: 0;
+        }
+
+        .col {
+            padding-left: 0;
+        }
+
+        .openmodal {
+            background-color: white;
+            color: black;
+            width: 30vw;
+
+        }
+
+        :-moz-any-link:focus {
+            outline: none;
+        }
+
+        button:active {
+            outline: none;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        .btn:focus {
+            box-shadow: none;
+        }
+    </style>

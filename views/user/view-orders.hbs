@@ -1,0 +1,250 @@
+<style>
+    .title {
+        margin-bottom: 5vh;
+    }
+
+    .input-cart {
+
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid rgb(0, 0, 0);
+        border-radius: 4px;
+    }
+
+    .h4c {
+        font-weight: 500;
+        font-family: Noto Sans, sans-serif;
+
+
+    }
+
+    .card {
+        margin: auto;
+        padding: 21px 19px;
+        width: 90%;
+        margin-top: 140px;
+        margin-bottom: 150px;
+        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: .5rem;
+        border: transparent;
+    }
+
+    @media(max-width:767px) {
+        .card {
+            margin: 3vh auto;
+        }
+    }
+
+    .cart {
+        background-color: #fff;
+        padding: 1vh 4vh;
+        border-bottom-left-radius: 1rem;
+        border-top-left-radius: 1rem;
+    }
+
+    @media(max-width:767px) {
+        .cart {
+            padding: 4vh;
+            border-bottom-left-radius: unset;
+            border-top-right-radius: 1rem;
+        }
+    }
+
+    .summary {
+        background-color: #ddd;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        padding: 4vh;
+        color: rgb(12, 0, 0);
+    }
+
+    @media(max-width:767px) {
+        .summary {
+            border-top-right-radius: unset;
+            border-bottom-left-radius: 1rem;
+        }
+    }
+
+    .summary .col-2 {
+        padding: 0;
+    }
+
+    .summary .col-10 {
+        padding: 0;
+    }
+
+    .row {
+        margin: 0;
+        color: rgb(0, 0, 0);
+        font-family: Arial, sans-serif
+    }
+
+    .title b {
+        font-size: 1.5rem;
+    }
+
+    .main {
+        margin: 0;
+        padding: 1vh 0;
+        width: 100%;
+    }
+
+    .col-2,
+    .col {
+        padding: 0 1vh;
+    }
+
+    a {
+        padding: 0 1vh;
+    }
+
+    .close {
+        margin-left: auto;
+        font-size: 0.7rem;
+    }
+
+    img {
+        width: 4.5rem;
+    }
+
+    .back-to-shop {
+        margin-top: 4.5rem;
+    }
+
+    h5 {
+        margin-top: 3vh;
+    }
+
+    .meaga {
+        margin-top: 0;
+    }
+
+    hr {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+
+    form {
+        padding: 2vh 0;
+    }
+
+    select {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1.5vh 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247);
+    }
+
+    input {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247);
+    }
+
+    input:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+
+    .btn {
+        background-color: #f0c14b;
+        border-color: #f0c14b;
+        color: white;
+        width: 100%;
+        font-size: 0.7rem;
+        margin-top: 1vh;
+        padding: 1vh;
+        border-radius: 0;
+    }
+
+    .btn:focus {
+        box-shadow: none;
+        outline: none;
+        box-shadow: none;
+        color: white;
+        -webkit-box-shadow: none;
+        /* -webkit-user-select: none; */
+        transition: none;
+    }
+
+    .btn:hover {
+        color: white;
+    }
+
+    a {
+        color: rgb(163, 139, 139);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: rgb(45, 30, 30);
+    }
+
+    #code {
+        background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+        background-repeat: no-repeat;
+        background-position-x: 95%;
+        background-position-y: center;
+    }
+
+    .proceed {
+        color: white;
+    }
+</style>
+<div class="card" id="cart-card-d" style="margin-top: 28px;">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="h4c"><b>Products</b></h4>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="row border-top border-bottom" style="color: green; text-shadow: #000; " >
+                <div class="row main align-items-center">
+                    <table id='example' class='table table-striped table-light table-bordered border-primary mt-2'
+                        style='width:100%'>
+                        <thead>
+
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Prize/Kg</th>
+                                <th>Quantity</th>
+                                <th>Total prize</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                              {{#each data.products}}
+                            <tr>
+                                <td><img src="/{{this.productId.image.[0]}}" width="50em" alt=""></td>
+                                <td>{{this.productId.Product_Name}}</td>
+                                <td>${{this.productId.Product_Prize}}</td>
+                                <td>{{this.quantity}}Kg</td>
+                                <td>${{subTotal this.productId.Product_Prize this.quantity}}</td>
+                            </tr> {{/each}}
+                            <tr>
+                                <td></td>
+                                <td>Total</td>
+                                <td></td>
+                                <td></td>
+                                <td>${{data.finalCost}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+</div>

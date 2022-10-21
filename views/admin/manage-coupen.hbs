@@ -1,0 +1,111 @@
+<main>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-md-11">
+                {{!-- start modal -------------------------------------------------------------- --}}
+                <div class="row mt-3">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#CoupenModal">Add
+                        Coupen
+                    </button>
+
+                    <div class="modal fade" id="CoupenModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">New message</h5><br>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form action="/admin/coupen" method="post">
+                                        <div class="mb-3">
+                                            <label id="modal_body" for="recipient-name" class="col-form-label">Coupen
+                                                Name</label>
+                                            <input type="text" class="form-control" id="recipient-name" value=""
+                                                name="name" required />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label id="modal_body" for="recipient-name" class="col-form-label">Coupen
+                                                Code</label>
+                                            <input type="text" class="form-control" id="recipient-name" value=""
+                                                name="code" required />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label id="modal_body" for="recipient-name" class="col-form-label">Discount
+                                                Prize</label>
+                                            <input type="text" class="form-control" id="recipient-name" value=""
+                                                name="Discountprice" required />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label id="modal_body" for="recipient-name" class="col-form-label">Coupen
+                                                Limit</label>
+                                            <input type="text" class="form-control" id="recipient-name" value=""
+                                                name="Coupenlimit" required />
+                                        </div>
+                                        <div class="modal-footer">
+                                            {{!-- {{#if session.categoryexist}}
+                                            <h6>Category Already Exist</h6>
+                                            {{/if}} --}}
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- table data---------------------------------------------------------------- --}}
+                    <div class="row justify-content-center">
+                        <div class="col-md-9">
+                            <div class="row mt-3">
+                                <div class="d-flex post-entry">
+                                    <table id='example'
+                                        class='table table-striped table-light table-bordered border-primary mt-2'
+                                        style='width:100%'>
+                                        <thead>
+                                            <tr>
+
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Code</th>
+                                                <th scope="col">Limit</th>
+                                                <th scope="col">Discount</th>
+                                                <th scope="col">Edit</th>
+                                                <th scope="col">Delete</th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            {{#each data}}
+                                            <tr>
+                                                <td>{{this.name}}</td>
+                                                <td>{{this.code}}</td>
+                                                <td>{{this.Coupenlimit}}</td>
+                                                <td>{{this.Discountprice}}</td>
+                                                <td>
+                                                    <a class="btn " type="button"
+                                                        href="/admin/editcoupen/{{this._id}}"><i
+                                                            class="icon-cog-p fas fa-edit "></i></a>
+                                                </td>
+                                                <td>
+                                                    <a class="btn " type="button"
+                                                        href="/admin/deletecoupen/{{this._id}}"
+                                                        onclick="return confirm('Are you want to edit?')">
+                                                        <i class="icon-cog-p fas fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+</main>
+

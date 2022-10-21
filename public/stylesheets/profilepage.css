@@ -1,0 +1,158 @@
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #f6d365;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
+
+.row-mai {
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+}
+
+.main-head-p {
+    width: 300px;
+}
+
+.card-acc-list {
+    margin: 15px;
+    width: 250px;
+    border-radius: 8px;
+
+    border-style: groove;
+}
+
+/* a .card-acc-list-a a:link, a:visited {
+    text-decoration: none;
+    color: #007185;
+    height: 100%;
+    display: block;
+} */
+
+.ya-card-cell:first-child {
+    padding-left: 0;
+    width: 320px;
+}
+
+.ya-card-cell {
+    display: table-cell;
+    height: 100%;
+    padding-left: 20px;
+    width: 340px;
+}
+ .ya-card-cell {
+    display: table-cell;
+    height: 100%;
+    padding-left: 20px;
+    width: 340px;
+}
+
+/* .ya-card__whole-card-link {
+    height: 100%;
+    display: block;
+} */
+/* .a-box {
+    display: block;
+    border-radius: 8px;
+    background-color: #fff;
+} */
+/* .a-box, .a-box-group>.a-box.a-color-alternate-background, .a-box-group>.a-box.a-color-offset-background {
+    border: 1px #D5D9D9 solid;
+} */
+.a-box .a-box-inner {
+    border-radius: 8px;
+    position: relative;
+    padding: 10px;
+}
+.lala{
+    height: 40px;
+    margin-right: 3px;
+}
+.lala-2 {
+    display: flex;
+
+}
+.ya-card__heading--rich {
+    color: #111;
+    font-size: 17px;
+}
+.a-color-secondary, .a-color-tertiary {
+    color: #565959!important;
+    font-size: 14px;
+}
+
+/*
+.a-ws div.a-column, div.a-column {
+    margin-right: 2%;
+    float: left;
+    min-height: 1px;
+    overflow: visible;
+}
+.a-row .a-span9, .a-ws .a-row .a-ws-span9 {
+    width: 74.448%;
+}
+.a-column.a-span-last {
+    margin-right: 0;
+    float: right;
+}
+h2.a-spacing-none, h3.a-spacing-none, h4.a-spacing-none {
+    padding-bottom: 0;
+}
+.ya-card__heading--rich {
+    color: #111;
+    font-size: 17px;
+}
+.l
+
+h1.a-spacing-none, h2.a-spacing-none, h3.a-spacing-none, h4.a-spacing-none {
+    padding-bottom: 0;
+}
+.ya-card__heading--rich {
+    color: #111;
+    font-size: 17px;
+}
+.a-spacing-none, .a-ws .a-ws-spacing-none {
+    margin-bottom: 0!important;
+}
+.a-text-normal {
+    font-weight: 400!important;
+    font-style: normal!important;
+    text-transform: none!important;
+    text-decoration: none!important;
+}
+.a-color-secondary, .a-color-tertiary {
+    color: #565959!important;
+} */
+
+
+
+/* edit view address  information */
+.address-text {
+    color: black;
+    font-size:15px;
+}
+.address-head {
+    font-weight: normal;
+}
+.add-address {
+    padding: 50px;
+    padding-top: 50px;
+    padding-left: 60px;
+    font-size: 50px;
+}
+.add-address-plus {
+   padding-left: 28px;
+    font-size: 40px;
+}
+.addres-edits {
+    color: rgb(40, 106, 159);
+}
+.addres-edits-a :hover {
+    color: rgb(162, 12, 12);
+    text-decoration: underline;
+}

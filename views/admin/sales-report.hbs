@@ -1,0 +1,118 @@
+<style>
+    td,
+    th {
+        font-size: 13px;
+    }
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm {
+        max-width: 1004px;
+    }
+
+    .dt-buttons {
+        margin: 20px;
+        justify-content: space-between;
+    }
+
+    .dataTables_filter {
+        margin-left: 200px;
+    }
+
+    .dt-button {
+        margin-left: 30px;
+        width: 100px;
+    }
+</style>
+<main>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-md-11 pe-0">
+                <div class="row mt-3">
+                    <div class="col-md-11 ms-4">
+                        <div class="row"> <button type="button" class="btn btn-danger">Sales
+                                Report
+                            </button></div>
+                    </div>
+
+
+
+                    {{!-- table data---------------------------------------------------------------- --}}
+                    <div class="row" id="order-details">
+                        <div class="col-md-12 ">
+                            <div class="d-flex justify-content-center mt-3">
+                                <div class="d-flex post-entry">
+                                    <table id="example"
+                                        class='table display nowrap table-striped table-light table-bordered border-primary mt-2'
+                                        style='width:100%'>
+                                        <thead>
+                                            <tr>
+
+                                                <th>No.</th>
+                                                <th>Date</th>
+                                                <th>Name</th>
+                                                <th>Payment method</th>
+                                                <th>Quantity</th>
+                                                <th>Total price </th>
+
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            {{#each data}}
+                                            <tr>
+                                                <td>{{add @index 1}}</td>
+                                                <td>{{this.date}}</td>
+                                                <td>{{this.userID.Company_Name}}</td>
+                                                <td>{{this.paymentMethod}}</td>
+                                                <td>{{this.totallQuantity}}</td>
+
+                                                <td>{{this.finalCost}}</td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td data-visible="false"></td>
+                                                <td data-visible="false"></td>
+                                                <td data-visible="false"></td>
+                                                <td data-visible="false"></td>
+                                                <td>Total</td>
+                                                <td>{{salesdata.totalRevenue}}</td>
+
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+</main>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+
+        });
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script>src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"</script>
+<script>src = "//cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"</script>
+<script>src = "//cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css"</script>

@@ -1,0 +1,319 @@
+{{#if session.categoryexist}}
+<script>
+
+  $(document).ready(function () {
+    function showmodal() {
+      $("#CategoryModal").modal('show')
+    }
+    setTimeout(showmodal, 500)
+  });
+</script>
+
+{{/if}}
+
+
+
+
+<main>
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class="col-md-11">
+        {{!-- start modal -------------------------------------------------------------- --}}
+        <div class="row mt-3">
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#CategoryModal">Add
+            Category
+          </button>
+
+          <div class="modal fade" id="CategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">New message</h5><br>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                  <form action="/admin/Add_Category" method="post">
+                    <div class="mb-3">
+                      <label id="modal_body" for="recipient-name" class="col-form-label">Category Name</label>
+                      <input type="text" class="form-control" id="recipient-name" value="" name="Category_Name"
+                        required />
+                    </div>
+                    <div class="modal-footer">
+                      {{#if session.categoryexist}}
+                      <h6>Category Already Exist</h6>
+                      {{/if}}
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-danger">Add</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {{!-- table data---------------------------------------------------------------- --}}
+          <div class="row justify-content-center">
+            <div class="col-md-9">
+              <div class="row mt-3">
+                <div class="d-flex post-entry">
+                  <table id='example' class='table table-striped table-light table-bordered border-primary mt-2'
+                    style='width:100%'>
+                    <thead>
+                      <tr>
+
+                        <th scope="col">Category_Name</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <div>
+                        {{#each session.categorydata}}
+                        <tr>
+
+                          <td id="Cname">{{this.Category_Name}}</td>
+                          {{!-- <td>
+                            <button class="btn btn-primary" type="button" id="lala" data-bs-toggle="modal"
+                              value="{{this.Category_Name}}" data-bs-target="#CategoryModal">Edit</button>
+                          </td> --}}
+                          <td>
+                            <a class="btn " type="button" data-bs-toggle="modal"
+                              data-bs-target="#editCategoryModal{{this._id}}"><i class="icon-cog-p fa fa-edit"></i></a>
+                          </td>
+
+                          <td>
+                            <a class="btn " type="button" data-bs-toggle="modal"
+                              data-bs-target="#deletecategory{{this._id}}"><i class="icon-cog-p fa fa-trash"></i></a>
+                          </td>
+                          {{!-- modal category----------------------------------- --}}
+                          <div id="deletecategory{{this._id}}" class="modal fade">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <h1>Delete category of {{this.Category_Name}}</h1>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                  <a href="/admin/delete-category/{{this._id}}"><button class="btn btn-secondary"
+                                      type="submit">Delete</button></a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          {{!-- EDIT CATEGORY MODAL -----------------------------}}
+                          <div class="modal fade" id="editCategoryModal{{this._id}}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">New message</h5><br>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                  <form action="/admin/edit_Category/{{this._id}}" method="post">
+                                    <div class="mb-3">
+                                      <label id="modal_body" for="recipient-name" class="col-form-label">Category
+                                        Name</label>
+                                      <input type="text" class="form-control" id="recipient-name"
+                                        value="{{this.Category_Name}}" name="Category_Name" required />
+                                    </div>
+                                    <div class="modal-footer">
+                                      {{#if session.categoryexist}}
+                                      <h6>Category Already Exist</h6>
+                                      {{/if}}
+                                      <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                      <button type="submit" class="btn btn-primary">Edit</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          {{!-- end edit category modal --}}
+                        </tr> {{/each}}
+                      </div>
+                      <tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          {{!-- start modal -----sub category--------------------------------------------------------- --}}
+          <div class="row mt-3">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#SubCategoryModal">Add
+              Sub
+              Category
+            </button>
+
+            <div class="modal fade" id="SubCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">New message</h5><br>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <div class="modal-body">
+                    <form action="/admin/Add_SubCategory" method="post">
+                      <div class="mb-3">
+                        <label id="modal_body" for="recipient-name" class="col-form-label">Sub Category Name</label>
+                        <input type="text" class="form-control" id="recipient-name" value="" name="Sub_Category_Name"
+                          required />
+                        <select class="form-select" id="inputGroupSelect01" name="Category_Name" required>
+
+                          {{#each session.categorydata}}
+                          <option value="{{this.Category_Name}}" name="option">{{this.Category_Name}}</option>
+                          {{/each}}
+
+                        </select>
+                      </div>
+                      <div class="modal-footer">
+                        {{#if session.subcategoryexist}}
+                        <h6>SubCategory Already Exist</h6>
+                        {{/if}}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {{!-- table data---------------------------------------------------------------- --}}
+            <div class="row justify-content-center">
+              <div class="col-md-9">
+                <div class="row mt-3">
+                  <div class="d-flex post-entry">
+                    <table id='example' class='table table-striped table-light table-bordered border-primary mt-2'
+                      style='width:100%'>
+                      <thead>
+                        <tr>
+                          <th scope="col">Sub_Category_Name</th>
+                          <th scope="col">Category</th>
+                          <th scope="col">Edit</th>
+                          <th scope="col">Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <div>
+                          {{#each session.subcategorydata}}
+
+
+                          <tr>
+
+
+                            <td id="Cname">{{this.Sub_Category_Name}}</td>
+                            <td>{{Category_name.Category_Name}}</td>
+
+
+
+
+
+                            {{!-- <td>
+                              <button class="btn btn-primary" type="button" id="lala" data-bs-toggle="modal"
+                                value="{{this.Category_Name}}" data-bs-target="#CategoryModal">Edit</button>
+                            </td> --}}
+                            <td>
+                              <a class="btn " type="button" data-bs-toggle="modal"
+                                data-bs-target="#editsubcategory{{this._id}}"><i class="icon-cog-p fa fa-edit"></i></a>
+                            </td>
+
+                            <td>
+                              <a class="btn " type="button" data-bs-toggle="modal"
+                                data-bs-target="#deletesubcategory{{this._id}}"><i
+                                  class="icon-cog-p fa fa-trash"></i></a>
+                            </td>
+                            {{!-- modal category-----delete subcategory------------------------------ --}}
+                            <div id="deletesubcategory{{this._id}}" class="modal fade">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <h1>Delete category of {{this.Sub_Category_Name}}</h1>
+
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                      data-bs-dismiss="modal">Close</button>
+
+                                    <a href="/admin/delete-sub-category/{{this._id}}"><button class="btn btn-secondary"
+                                        type="submit">Delete</button></a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            {{!-- EDIT CATEGORY MODAL --------edit-sub-categories---------------------}}
+                            <div class="modal fade" id="editsubcategory{{this._id}}{{session.categorydata}}"
+                              tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">New message</h5><br>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+
+                                  <div class="modal-body">
+                                    <form action="/admin/edit-sub_Category/{{this._id}}" method="post">
+                                      <div class="mb-3">
+                                        <label id="modal_body" for="recipient-name" class="col-form-label">Category
+                                          Name</label>
+                                        <input type="text" class="form-control" id="recipient-name"
+                                          value="{{Sub_Category_Name}}" name="Category_Name" required />
+                                        <select class="form-select" id="inputGroupSelect01" name="Category_Name"
+                                          required>
+
+                                          {{#each session.categorydata}}
+                                          <option value="{{this.Category_Name}}" name="option">{{this.Category_Name}}
+                                          </option>
+                                          {{/each}}
+
+                                        </select>
+                                      </div>
+                                      <div class="modal-footer">
+                                        {{#if session.subcategoryexist}}
+                                        <h6>SubCategory Already Exist</h6>
+                                        {{/if}}
+                                        <button type="button" class="btn btn-secondary"
+                                          data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Edit</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            {{!-- end edit category modal --}}
+                          </tr> {{/each}}
+                        </div>
+                        <tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</main>

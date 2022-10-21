@@ -1,0 +1,139 @@
+<style>
+    .moreview {
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        font-size: 13px;
+        padding: 10px, 0px, 0px, 10px;
+    }
+</style>
+
+<div class="container-fluid bg-light bg-icon mb-5">
+    <div class="container">
+        <div class='row row-mai  d-flex justify-content-center mt-0 align-items-center h-100' id="rowmai">
+            <div class='col col-lg-12 mt-3 mb-5 mb-lg-0'>
+                <div class="card card-stepper" style="border-radius: 10px;">
+                    <div class="card-body p-4 mt-2 cancelledorder" style="border: 1px solid #352a2a;display: none;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-column">
+                                <span class="lead fw-normal">Your order has beenCancelled</span>
+                                <span class=" small">Order date:</span>
+                                <span>view details <a href="/admin/orderdetails/"><i
+                                            class="text-danger fa fa-eye ms-2 "></i></a></span>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                    </div>
+                    {{#if data}}
+                    {{#each data}}
+                    <div class="card-body p-4 mt-2" style="border: 1px solid #352a2a;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-column">
+                                <span class="lead fw-normal">Your order has been {{this.orderStatus}}</span>
+                                <span class=" small">Products:{{#each
+                                    this.products}}{{productId.Product_Name}},{{/each}}</span>
+                                <span class=" small">Total Prize:{{this.finalCost}}</span>
+                                <span class=" small">Order date:{{this.date}}</span>
+                                <span class="moreview">view details <a href="/vieworders/{{this._id}}"><span
+                                            style="color: rgb(1, 8, 86);">Click</span></a></span>
+                            </div>
+                            <div style="display: flex;">
+                                {{!-- <button class="btn btn-outline-dark" type="button"
+                                    style="border-radius: 4px;">Invoice</button> --}}
+                                {{#twoConditions orderStatus "Delivered" orderStatus "Cancelled"}}
+                                <button class="btn btn-outline-dark ms-2" type="button" style="border-radius: 4px;"
+                                    hidden>Cancel order</button>
+                                {{else}}
+                                <button class="btn btn-outline-dark ms-2" data-id="{{this._id}}"
+                                    onclick="cancelOrder(this);" style="border-radius: 4px;">Cancel order</button>
+                                {{/twoConditions}}
+                            </div>
+                        </div>
+                        <hr class="my-4">
+
+                        <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
+
+                            {{#ifEquals this.orderStatus "Packed"}}<span
+                                class="d-flex justify-content-center align-items-center big-dot dot">
+                                <i class="fa fa-check text-white"></i></span>{{else}}<span
+                                class="dot"></span>{{/ifEquals}}
+                            <hr class="flex-fill track-line">
+                            {{#ifEquals this.orderStatus "Shipped"}}<span
+                                class="d-flex justify-content-center align-items-center big-dot dot">
+                                <i class="fa fa-check text-white"></i></span>{{else}}<span
+                                class="dot"></span>{{/ifEquals}}</span>
+                            <hr class="flex-fill track-line">
+                            {{#ifEquals this.orderStatus "Delivered"}}<span
+                                class="d-flex justify-content-center align-items-center big-dot dot">
+                                <i class="fa fa-check text-white"></i></span>{{else}}<span
+                                class="dot"></span>{{/ifEquals}}
+                        </div>
+
+                        <div class="d-flex flex-row justify-content-between align-items-center">
+                            <div class="d-flex flex-column align-items-start"><span>Order
+                                    Packed</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center align-items-center"><span>Order
+                                    Shipped</span></div>
+
+                            <div class="d-flex flex-column align-items-end"><span>Delivered</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{else}}
+                    <div class="card-body p-4 mt-2 cancelledorder" style="border: 1px solid #352a2a;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-column">
+                                <span class="lead fw-normal">Your order is empty.Please purchase and get more
+                                    offers</span>
+
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                    </div>
+                    {{/if}}
+                </div>
+                <hr class='mt-0 mt-4' />
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<style>
+    .track-line {
+        height: 2px !important;
+        background-color: #488978;
+        opacity: 1;
+    }
+
+    .dot {
+        height: 10px;
+        width: 10px;
+        margin-left: 3px;
+        margin-right: 3px;
+        margin-top: 0px;
+        background-color: #488978;
+        border-radius: 50%;
+        display: inline-block
+    }
+
+    .big-dot {
+        height: 25px;
+        width: 25px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        background-color: #488978;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .big-dot i {
+        font-size: 12px;
+    }
+
+    .card-stepper {
+        z-index: 0
+    }
+</style>

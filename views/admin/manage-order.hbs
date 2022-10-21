@@ -1,0 +1,166 @@
+<style>
+    td,
+    th {
+        font-size: 13px;
+    }
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm {
+        max-width: 1004px;
+    }
+
+    .dataTables_length {
+        width: 300px;
+    }
+
+    .dataTables_filter {
+        margin-left: 600px;
+    }
+
+    .dataTables_wrappe {
+        display: flex;
+    }
+</style>
+<main>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-md-11 pe-0">
+                <div class="row mt-3">
+                    <div class="col-md-11 ms-4">
+                        <div class="row"> <button type="button" class="btn btn-danger">Order
+                                details
+                            </button></div>
+                    </div>
+
+
+
+                    {{!-- table data---------------------------------------------------------------- --}}
+                    <div class="row justify-content-center" id="order-details">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-center mt-3">
+                                <div class="d-flex post-entry">
+                                    <table id='example'
+                                        class='table table-striped table-light table-bordered border-primary mt-2'
+                                        style='width:100%'>
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Customer</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Payment</th>
+                                                <th scope="col">Payment status</th>
+                                                <th scope="col">Order status</th>
+                                                <th scope="col">View</th>
+                                                <th scope="col">Action</th>
+                                                <th scope="col"></th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            {{#each data}}
+                                            <tr>
+                                                <td>{{add @index 1}}</td>
+                                                <td>{{this.date}}</td>
+                                                <td>{{this.userID.Company_Name}}</td>
+                                                <td>{{this.finalCost}}</td>
+                                                <td>{{this.paymentMethod}}</td>
+                                                <td>{{this.paymentStatus}}</td>
+                                                <td>{{this.orderStatus}}</td>
+                                                <td><a href="/admin/vieworder/{{this._id}}"><i
+                                                            class="text-danger fa fa-eye d-flex justify-content-center"
+                                                            aria-hidden="true"></i></a></td>
+                                                <td class="justify-content-center">
+                                                    {{#twoConditions orderStatus "Delivered" orderStatus "Cancelled"}}
+                                                    {{#ifEquals orderStatus "Delivered"}}
+                                                    <i class="text-danger fa fa-check-square d-flex justify-content-center"
+                                                        aria-hidden="true"></i></i>
+                                                    {{else}}
+                                                    <i class="text-danger fa  fa-window-close d-flex justify-content-center"
+                                                        aria-hidden="true"></i></i>
+                                                    {{/ifEquals}}
+                                                    {{else}}
+                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown"
+                                                        style="color: black;">
+                                                        {{#ifEquals this.orderStatus "Placed"}}
+                                                        <i class="text-danger fa fa-share-square d-flex justify-content-center"
+                                                            aria-hidden="true"></i></a>{{/ifEquals}}
+                                                    {{#ifEquals this.orderStatus "Packed"}}
+                                                    <i class="text-danger fa fa-shopping-bag  d-flex justify-content-center"
+                                                        aria-hidden="true"></i></a>{{/ifEquals}}
+                                                    {{#ifEquals this.orderStatus "Shipped"}}
+                                                    <i class="text-danger fa fa-truck d-flex justify-content-center"
+                                                        aria-hidden="true"></i></a>{{/ifEquals}}
+                                                    {{#ifEquals this.orderStatus "Delivered"}}
+                                                    <i class="text-danger fa fa-check-square d-flex justify-content-center"
+                                                        aria-hidden="true"></i></a>{{/ifEquals}}
+                                                    <div class="dropdown-menu ">
+                                                        {{#ifEquals this.orderStatus "Placed"}}
+                                                        <a data-id="{{this._id}}" data-status="Packed"
+                                                            onclick="changePaymentStatus(this);"
+                                                            class="dropdown-item">Packed
+                                                        </a>{{/ifEquals}}
+                                                        {{#ifEquals this.orderStatus "Packed"}}
+                                                        <a data-id="{{this._id}}" data-status="Shipped"
+                                                            onclick="changePaymentStatus(this);"
+                                                            class="dropdown-item">Shipped
+                                                        </a>{{/ifEquals}}
+                                                        {{#ifEquals this.orderStatus "Shipped"}}
+                                                        <a data-id="{{this._id}}" data-status="Delivered"
+                                                            onclick="changePaymentStatus(this);"
+                                                            class="dropdown-item">Delivered
+                                                        </a>{{/ifEquals}}{{/twoConditions}}
+                                                    </div>
+
+                                                </td>
+                                                {{#threeConditions paymentStatus "Confirmed" orderStatus "Delivered"
+                                                orderStatus "Cancelled"}}
+
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-light"
+                                                        disabled>Cancel</button>
+                                                </td>
+                                                {{else}}
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <td><button class="btn btn-sm btn-light" data-id=" {{this._id}}"
+                                                            onclick="cancelOrderAdmin(this);">Cancel</button>
+                                                    </td>
+                                                </div>
+                                                {{/threeConditions}}
+
+
+                                            </tr>
+                                            {{/each}}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+</main>
+
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script>src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"</script>
+<script>src = "//cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"</script>
+<script>src = "//cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css"</script>

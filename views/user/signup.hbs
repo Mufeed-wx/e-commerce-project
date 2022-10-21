@@ -1,0 +1,194 @@
+<!-- Page Header Start -->
+<div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <h1 class="display-3 mb-3 animated slideInDown">Join Our Team</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a class="text-body" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-body" href="#">Pages</a></li>
+                <li class="breadcrumb-item text-dark active" aria-current="page">Contact Us</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Contact Start -->
+<div class="container-xxl py-6">
+    <div class="container">
+        <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
+            style="max-width: 500px;">
+            <h1 class="display-5 mb-3">Contact Us</h1>
+            <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+        </div>
+        <div class="row g-5 justify-content-center mb-5">
+
+            <div class="col-lg-7 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+
+                <form action="\signup" method="post" id="first">
+                    <div class="row g-3">
+                        {{#if session.NumberAlreadyExist}}
+                        <p class="text-danger">Mobile Number or Email Already Exist</p>
+                        {{/if}}
+                        <div class="col-md-6">
+                            <label class="form-label" for="form6Example3">Company name/shop name</label>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="cname" name="Company_Name" onkeyup="validateCompanyName()">
+                                <span id="companyname-error" class="text-danger font-weight-bold"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="form6Example3">Mobile Number</label>
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="phone" name="Mobile_Number" onkeyup="validatePhone()"  />
+                                 <span id="phone-error" class="text-danger font-weight-bold"></span>
+                                <label for=""></label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-4">
+                        <label class="form-label" for="form6Example3">ENTER YOUR NAME</label>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="name" name="User_Name"  onkeyup="validateName()"/>
+                             <span id="name-error" class="text-danger font-weight-bold"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-4">
+                        <label class="form-label" for="form6Example3">ENTER YOUR EMAIL</label>
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" name="User_Email" onkeyup="validateEmail()" />
+                            <span id="email-error" class="text-danger font-weight-bold"></span>
+                            <label for=""></label>
+                        </div>
+
+                    </div>
+                    <div class="col-12 mt-4">
+                        <label class="form-label" for="form6Example3">ENTER PASSWORD</label>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="Password" placeholder="Subject"
+                                name="Password"  onkeyup="validatePassword()" />
+                                <span id="pass-error" class="text-danger font-weight-bold"></span>
+                            <label for=""></label>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <label class="form-label" for="form6Example3">RE ENTER PASSWORD</label>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="Re_Password" placeholder="Subject"
+                                name="Re_Password" onkeyup="validateConfirm()"  />
+                                <span id="confirmPass-error" class="text-danger font-weight-bold"></span>
+                            <label for=""></label>
+                        </div>
+                    </div>
+                    <input type="hidden" id="form6Example1" class="form-control" name="User_status" value="true" />
+                    <input type="hidden" id="form6Example1" class="form-control" name="button" value="true" />
+                    <div class="col-12" style="margin-left: 200px;">
+
+                        <button type="submit" class="btn mt-5 btn-primary" onclick="return validateForm()">Register
+                        </button>
+                        <span id="submit-error" class="text-danger font-weight-bold"></span>
+
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Contact End -->
+
+
+
+
+
+  <!-- Footer -->
+  <footer
+          class="text-center text-lg-start text-white"
+          style="background-color: #000000"
+          >
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 text-white font-weight-bold">
+              Company name
+            </h6>
+            <p> 
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold text-white">Products</h6>
+            <p>
+              <a class="text-white">MDBootstrap</a>
+            </p>
+            <p>
+              <a class="text-white">MDWordPress</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold text-white">Contact</h6>
+            <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+            <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+          </div>
+          <!-- Grid column -->
+
+
+          
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+
+  </footer>
+  <!-- Footer -->
+</div>
+<!-- End of .container -->
+  </div>
+</div>
+<!-- Footer End -->
+
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+
+
+
+<style>
+    .form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown) {
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    
+}
+.form-floating>.form-control, .form-floating>.form-select {
+    height: calc(2.5rem + 2px);
+    padding: 1rem 0.75rem;
+}
+.text-danger {
+    font-size: 13px;
+}
+</style>

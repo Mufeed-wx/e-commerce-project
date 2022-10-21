@@ -1,0 +1,90 @@
+<style>
+    .button-edit {
+        background-color: #f0c14b;
+        width: 70px;
+        border: none;
+        height: 30px;
+        border-radius: 4px;
+    }
+</style>
+<div class="container-fluid bg-light bg-icon mb-5">
+    <div class="container">
+        <div class='row row-mai  d-flex justify-content-center mt-0 align-items-center h-100'>
+            <div class='col col-lg-12 mt-3 mb-5 mb-lg-0'>
+                <div class='card mb-3' style='border-radius: .5rem;padding: 40px 38px;border-radius: 0px;'>
+                    <div class='row g-0'>
+                        <form action="/edituserdata" method="post">
+                            <div class='col-md-12'>
+                                <div class='card-body pl-2'>
+                                    <h6>Personal Information</h6>
+
+                                    <hr class='mt-0 mb-4' />
+                                    <div class='row pt-1'>
+                                        <div class='col-6 mb-3'>
+                                            <h6>Name</h6>
+                                            <input type="text" name="User_Name" value="{{data.User_Name}}">
+                                        </div>
+                                        <div class='col-6 mb-3'>
+                                            <h6>Email</h6>
+                                            <input type="email" name="User_Email" value="{{session.user.User_Email}}">
+                                        </div>
+                                        <div class='col-6 mb-3'>
+                                            <h6>Company Name</h6>
+                                            <input type="text" name="Company_Name"
+                                                value="{{session.user.Company_Name}}">
+                                        </div>
+                                        <div class='col-6 mb-3'>
+                                            <h6>Phone</h6>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-lg-12 mb-3 '>
+                                <div class="text-end pe-5">
+                                    <button class="button-edit" type="submit" ;">edit</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class='col-md-12'>
+                            <div class='card-body pl-2'>
+                                <h6>Secuirity</h6>
+                                <hr class='mt-0 mb-4' />
+                                <div class='row pt-1'>
+                                    <div class='col-12 mb-3'>
+                                        <h6>Old Password</h6>
+                                        <input class="col-6" type="text" id="Old_Password" name="Old_Password"
+                                            onkeyup="validateOldPassword()">
+
+                                    </div>
+                                    <span id="old-pass-error" class="text-danger font-weight-bold"></span>
+                                    <div class='col-12 mb-3'>
+                                        <h6>New Password</h6>
+                                        <input class="col-6" type="text" id="Password" name="Password"
+                                            onkeyup="validatePassword()">
+
+                                    </div>
+                                    <span id="pass-error" class="text-danger font-weight-bold"></span>
+                                    <div class='col-12 mb-3'>
+                                        <h6>Confirm Password</h6>
+                                        <input class="col-6" type="text" <input class="col-6" type="text"
+                                            id="Re_Password" name="Re_Password" onkeyup="validateConfirm()">
+                                    </div>
+                                    <span id="confirmPass-error" class="text-danger font-weight-bold"></span>
+                                    <span id="submit-error" class="text-danger font-weight-bold"></span>
+                                    <p class="text-danger " id="passwordwrong" style="font-size: 13px;"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-lg-12 mb-3 '>
+                            <div class="text-end pe-5">
+                                <button class="button-edit" type="submit" onclick="changeUserPassword()">edit</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
