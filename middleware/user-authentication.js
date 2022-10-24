@@ -1,4 +1,5 @@
-const session = require('express-session');
+var session = require('express-session');
+
 
 function userAuthentication(req, res, next) {
     session = req.session;
