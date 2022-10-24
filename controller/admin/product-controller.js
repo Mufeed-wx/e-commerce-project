@@ -4,6 +4,7 @@ const adminhelper = require("../../helpers/admin-helper");
 const productHelper = require("../../helpers/product-helpers");
 const multer = require("multer");
 const productcontrol = require('../../models/product-modal')
+const productModel = require('../../models/product-modal')
 
 var fs = require('fs')
 
@@ -18,7 +19,7 @@ module.exports = {
                         session.categorydata = category;
                         session.subcategorydata = subcategory;
                         session.product = product;
-                        res.render("admin/Manage_Product", { session, admin: true });
+                        res.render("admin/product-management", { session, admin: true });
                     });
                 });
             });
@@ -34,7 +35,7 @@ module.exports = {
                     adminhelper.getsubcategory().then((subcategory) => {
                         session.categorydata = category;
                         session.subcategorydata = subcategory;
-                        res.render("admin/Manage_Category", { session, admin: true });
+                        res.render("admin/category-management", { session, admin: true });
                     });
                 });
             } else {
@@ -49,14 +50,14 @@ module.exports = {
         try {
             session = req.session;
             adminhelper.addCategory(req.body).then((response) => {
-                if (response.categoryexist) {
-                    req.session.categoryexist = true;
+                if (response.categoryExist) {
+                    req.session.categoryExist = true;
 
-                    res.redirect("/admin/Manage_Category");
+                    res.redirect("/admin/category-management");
                 } else {
                     console.log("category stored");
-                    req.session.categoryexist = false;
-                    res.redirect("/admin/Manage_Category");
+                    req.session.categoryExist = false;
+                    res.redirect("/admin/category-management");
                 }
             });
         }
@@ -66,11 +67,11 @@ module.exports = {
     },
     deleteCategory: (req, res, next) => {
         try {
-            let userid = req.params._id;
+            let userid = req.body.id;
             adminhelper.deletecategory(userid).then((data) => {
                 if (data) {
                     console.log("deleted");
-                    res.redirect("/admin/Manage_Category");
+                    res.json({ status: 200 })
                 } else {
                     console.log(data);
                 }
@@ -83,15 +84,14 @@ module.exports = {
     editCategory: (req, res, next) => {
         try {
             session = req.session;
-            req.body._id = req.params._id;
             adminhelper.editCategory(req.body).then((response) => {
                 if (response.categoryexist) {
                     req.session.categoryexist = true;
-                    res.redirect("/admin/Manage_Category");
+                    res.redirect("/admin/category-management");
                 } else {
                     console.log("category edited");
                     req.session.categoryexist = false;
-                    res.redirect("/admin/Manage_Category");
+                    res.json({ status: 200 })
                 }
             });
         }
@@ -101,14 +101,14 @@ module.exports = {
     },
     addSubCategory: (req, res, next) => {
         try {
-            adminhelper.addsubCategory(req.body).then((response) => {
+            adminhelper.addSubCategory(req.body).then((response) => {
                 if (response.subcategoryexist) {
                     req.session.subcategoryexist = true;
-                    res.redirect("/admin/Manage_Category");
+                    res.redirect("/admin/category-management");
                 } else {
                     console.log("subcategory stored");
                     req.session.subcategoryexist = false;
-                    res.redirect("/admin/Manage_Category");
+                    res.redirect("/admin/category-management");
                 }
             });
         }
@@ -118,11 +118,12 @@ module.exports = {
     },
     deleteSubCategory: (req, res, next) => {
         try {
-            let userid = req.params._id;
+            let userid = req.body.id;
+            console.log('id', userid);
             adminhelper.deletesubcategory(userid).then((data) => {
                 if (data) {
                     console.log("delete subcategory");
-                    res.redirect("/admin/Manage_Category");
+                    res.json({ status: 200 })
                 } else {
                     console.log(data);
                 }
@@ -141,6 +142,7 @@ module.exports = {
                 .addproduct(req.body)
                 .then((response) => {
                     console.log("successfully stored product");
+                    res.redirect('/admin/product-management')
                 })
                 .catch((err) => {
                     console.log("error found", err);
@@ -157,7 +159,7 @@ module.exports = {
                     session = req.session;
                     session.productDataByEdit = productDataByEdit;
                     session.categorydata = category;
-                    res.render("admin/product_edit", { session, admin: true });
+                    res.render("admin/product-edit", { session, admin: true });
                 });
             });
         }
@@ -173,7 +175,7 @@ module.exports = {
             let ID = req.params._id;
             req.body._id = ID;
             productHelper.EditproductByid(req.body).then((Editdata) => {
-                res.redirect('/admin/Manage_Product')
+                res.redirect('/admin/product-management')
             });
         }
         catch (err) {
@@ -181,22 +183,21 @@ module.exports = {
         }
     },
     deleteProduct: async (req, res, next) => {
+        let image = await productModel.findById({ _id: req.body.id }).lean()
+
+        let final = image.image;
+        final.forEach(data => {
+            fs.unlinkSync('public/' + data);
+        })
+
         try {
-            console.log("vannu");
-            let image = await productcontrol.findById({ _id: req.params._id }).lean()
 
-            let final = image.image;
-            final.forEach(data => {
-                fs.unlinkSync('public/' + data);
-            })
-            let data = await productcontrol.findByIdAndDelete({ _id: req.params._id })
+            let data = await productModel.findByIdAndDelete({ _id: req.body.id })
             console.log("deleted");
-            res.redirect('/admin/Manage_Product')
-
-
+            res.json({ status: 200 })
         }
         catch (err) {
-            next(err)
+            next(err);
         }
-    },
+    }
 }

@@ -1,0 +1,62 @@
+<main>
+
+  <div class='container' id="userManagement">
+    <div class='row justify-content-end'>
+      <div class='col-md-11'>
+        <div class='row'>
+
+          <div class='col-md-12'>
+            <div class='row mt-3'>
+              <button type='button' class='btn btn-danger'>User Details
+              </button>
+              <div class='d-flex post-entry'>
+                <table id='example' class='table table-striped table-light table-bordered border-primary mt-2'
+                  style='width:100%'>
+                  <thead>
+                    <tr>
+                      <th>Company name</th>
+                      <th>Mobile number</th>
+                      <th>E-mail</th>
+                      <th>User Status</th>
+                      <th>BLOCK</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {{#each session.userData}}
+                    <tr>
+                      <td>{{this.Company_Name}}</td>
+                      <td>{{this.Mobile_Number}}</td>
+                      <td>{{this.User_Email}}</td>
+                      {{#if this.User_status}}
+                      <td>ACTIVE</td>
+                      {{else}}
+                      <td>BLOCKED</td>
+                      {{/if}}
+                      {{#if this.User_status}}
+                      {{/if}}
+
+                      {{#if this.User_status}}
+                      <td>
+                        <a class='btn btn-danger' type='button' data-id="{{this._id}}"
+                          onclick="blockUser(this);">BLOCK</a>
+                      </td>
+                      {{else}}
+                      <td>
+                        <a class='btn btn-danger' type='button' data-id="{{this._id}}" onclick="activeUser(this);">
+                          ACTIVE</a>
+                      </td>
+                      {{/if}}
+                    </tr>
+                    {{/each}}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

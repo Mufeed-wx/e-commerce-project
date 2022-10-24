@@ -1,33 +1,44 @@
 //const session = require("express-session")
 
 function goDoSomething(identifier) {
-  // alert("data-id:" + $(identifier).data('id') + ", data-option:" + $(identifier).data('option'));
   var data = $(identifier).data('id');
   console.log("jhsadbfb", data)
-  $.post("/wishlist",
-    {
-      id: data
-    },
-    function (data, status) {
-      console.log("vannuuuuuuuuuuuu")
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
 
-      Toast.fire({
-        icon: 'success',
-        title: 'product successfully added'
-      })
-    });
+  $.ajax({
+    url: '/wishlist',
+    method: 'post',
+    dataType: 'json',
+    data: { 'id': data },
+    success: function (response) {
+      if (response.msg == 'success') {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+
+        Toast.fire({
+          icon: 'success',
+          title: 'product successfully added'
+        })
+      } else {
+        location.href = '/login'
+      }
+
+    },
+
+    error: function (response) {
+      location.href = '/login'
+    }
+  });
 }
+
 
 function deleteWhishlist(value) {
   var data = $(value).data('id');
@@ -47,7 +58,7 @@ function deleteWhishlist(value) {
       }
     },
     error: function (response) {
-      alert('server error')
+      console.log('error whishlist');
     }
   });
 }
@@ -80,13 +91,13 @@ function shoppingCart(value) {
           title: 'product successfully added'
         })
       } else {
-        alert('data not added');
+        location.href = '/login'
       }
 
     },
 
     error: function (response) {
-      alert('server side error')
+      location.href = '/login'
     }
   });
 }
@@ -307,7 +318,7 @@ function changePaymentStatus(value) {
   var status = $(value).data('status');
   console.log("ada", id, status);
   $.ajax({
-    url: '/admin/orders',
+    url: '/admin/orders-management',
     method: 'post',
     dataType: 'json',
     data: { 'id': id, 'status': status },
@@ -496,7 +507,7 @@ function cancelOrderAdmin(id) {
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: '/admin/ordercancel',
+        url: '/admin/orderCancel',
         method: 'post',
         dataType: 'json',
         data: { 'id': id },
@@ -527,8 +538,8 @@ function logoutAdmin() {
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: '/admin/adminlogout',
-        method: 'get',
+        url: '/admin/login',
+        method: 'delete',
         dataType: 'json',
         data: {},
         success: function (response) {
@@ -540,3 +551,5 @@ function logoutAdmin() {
     }
   })
 }
+
+

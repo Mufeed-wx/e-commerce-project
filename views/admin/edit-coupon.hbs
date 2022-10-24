@@ -4,32 +4,32 @@
             <div class="col-md-11">
                 <div class="row">
                     <div class="d-flex post-entry mt-5">
-                        <form action="/admin/editcoupen/{{data._id}}" method="post" >
+                        <form action="/admin/editCoupon/{{data._id}}" method="post">
                             <!-- 2 column grid layout with text inputs for the first and last names -->
                             <div class="row col-lg-8 text-centre">
                                 <div class="mb-3">
                                     <label id="modal_body" for="recipient-name" class="col-form-label">Coupen
                                         Name</label>
-                                    <input type="text" class="form-control" id="recipient-name" value="{{data.name}}" name="name"
-                                        required />
+                                    <input type="text" class="form-control" id="recipient-name" value="{{data.name}}"
+                                        name="name" required />
                                 </div>
                                 <div class="mb-3">
                                     <label id="modal_body" for="recipient-name" class="col-form-label">Coupen
                                         Code</label>
-                                    <input type="text" class="form-control" id="recipient-name" value="{{data.code}}" name="code"
-                                        required />
+                                    <input type="text" class="form-control" id="recipient-name" value="{{data.code}}"
+                                        name="code" required />
                                 </div>
                                 <div class="mb-3">
                                     <label id="modal_body" for="recipient-name" class="col-form-label">Discount
                                         Prize</label>
-                                    <input type="number" class="form-control" id="recipient-name" value="{{data.Discountprice}}"
-                                        name="Discountprice" required />
+                                    <input type="number" class="form-control" id="recipient-name"
+                                        value="{{data.Discountprice}}" name="Discountprice" required />
                                 </div>
                                 <div class="mb-3">
                                     <label id="modal_body" for="recipient-name" class="col-form-label">Coupen
                                         Limit</label>
-                                    <input type="number" class="form-control" id="recipient-name" value="{{data.Coupenlimit}}"
-                                        name="Coupenlimit" required />
+                                    <input type="number" class="form-control" id="recipient-name"
+                                        value="{{data.Coupenlimit}}" name="Coupenlimit" required />
                                 </div>
                                 <div class="mb-3 text-end">
                                     <button type="button" class="btn btn-secondary"
@@ -46,5 +46,3 @@
     </div>
     </div>
 </main>
-
-

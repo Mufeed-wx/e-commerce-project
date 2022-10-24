@@ -5,7 +5,7 @@ const orderModel = require('../models/order-model')
 var fs = require('fs')
 const userModel = require('../models/user-model')
 const productcontrol = require('../models/product-modal')
-const coupenModel = require('../models/coupen-model')
+const couponModel = require('../models/coupon-model')
 const Razorpay = require("razorpay");
 
 
@@ -181,7 +181,7 @@ module.exports = {
     //GET ALL COUPONS DATA
     getCoupons: async (cb) => {
         try {
-            const Coupons = await coupenModel.find().lean();
+            const Coupons = await couponModel.find().lean();
             cb(Coupons);
         } catch (err) {
             cb(err);
@@ -191,7 +191,7 @@ module.exports = {
     editCoupon: (couponID, cb) => {
         return new Promise(async (resolve, reject) => {
             try {
-                const coupon = await coupenModel.findOne({ _id: couponID }).lean();
+                const coupon = await couponModel.findOne({ _id: couponID }).lean();
                 cb(coupon);
             } catch (error) {
                 cb(error);
@@ -202,7 +202,7 @@ module.exports = {
         try {
             data.name = data.name.toUpperCase();
             data.code = data.code.toUpperCase();
-            await coupenModel.findByIdAndUpdate(
+            await couponModel.findByIdAndUpdate(
                 { _id: id },
                 {
                     $set: {
@@ -221,7 +221,8 @@ module.exports = {
     //DELETE COUPON
     deleteCoupon: async (id, cb) => {
         try {
-            await coupenModel.deleteOne({ _id: id });
+            console.log('gagaga', id);
+            await couponModel.deleteOne({ _id: id });
             cb(true)
         } catch (err) {
             cb(err);

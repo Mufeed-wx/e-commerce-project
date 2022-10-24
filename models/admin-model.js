@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
-const Schema=mongoose.Schema;
+const Schema = mongoose.Schema;
 
-let userSchema=new Schema({
-    mailid:{
-        type:String,
+let userSchema = new Schema({
+    email: {
+        type: String,
     },
-    password:{
-        type:String,
+    password: {
+        type: String,
     },
-})
 
-const addadmin=mongoose.model("admin",userSchema);
-module.exports=addadmin;
+}, { timestamps: true })
+
+const addadmin = mongoose.model("admin", userSchema);
+module.exports = addadmin;

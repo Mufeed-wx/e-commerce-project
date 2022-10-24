@@ -36,10 +36,7 @@ module.exports = {
           console.log(response, "wishlisttttttttt");
           wishlistempty = response.wishlistempty;
           wishlist = response.wishlist;
-
-          res.json([{
-            id_recieved: req.body.id,
-          }])
+          res.json({ msg: 'success' });
         });
     }
     catch (err) {

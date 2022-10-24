@@ -13,7 +13,7 @@ module.exports = {
                 .populate("userID")
                 .populate("products.productId")
                 .lean();
-            res.render('admin/manage-order', { admin: true, session, data })
+            res.render('admin/order-management', { admin: true, session, data })
         }
         catch (err) {
             next(err)
@@ -42,7 +42,7 @@ module.exports = {
             next(err)
         }
     },
-    vieworder: async (req, res, next) => {
+    viewOrder: async (req, res, next) => {
         id = req.params._id;
         await productHelper.getSingleOrder(id, (data) => {
             console.log(data.products[0], 'oooo');

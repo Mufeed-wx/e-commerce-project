@@ -1,144 +1,95 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const productcontrol = require('../models/product-modal')
-var fs = require('fs')
+const fs = require('fs')
 
 const orderController = require('../controller/admin/order-controller')
 const userController = require('../controller/admin/user-controller')
 const productController = require('../controller/admin/product-controller')
 
-//Middleware
-const midddleware = require('../middleware/admin-authentication');
+//MIDDLEWARE
+const middleware = require('../middleware/admin-authentication');
 
-const { storage } = midddleware;
+// MULTER USING FOR PRODUCT UPLOAD
+const { storage } = middleware;
 const upload = multer({ storage });
 
-const { StorageCurousel } = midddleware;
-const Curouselupload = multer({
-  storage: StorageCurousel,
+// MULTER USING FOR CAROUSEL UPLOAD
+const { storageCarousel } = middleware;
+const carouselUpload = multer({
+  storage: storageCarousel,
 });
-// const { route } = require("./users");
 
+
+// MAIN ROUTE
 router.route('/')
   .get(userController.verification)
 
-router.route('/adminloginpage')
-  .get(userController.verificationlogin)
-  .post(userController.loginData)
-
-router.route('/adminlogout')
-  .get(userController.logout)
-
+// ADMIN LOGIN
+router.route('/login')
+  .get(userController.viewLoginPage)
+  .post(userController.verifyLoginData)
+  .delete(userController.logout)
 
 
-router.route('/block-user/:id')
-  .get(midddleware.authentication, userController.blockUser)
-
-router.route('/active-user/:id')
-  .get(midddleware.authentication, userController.activeUser)
-
-router.route('/view_user')
-  .get(midddleware.authentication, userController.viewUser)
+//USER MANAGEMENT-ADMIN SIDE
+router.route('/user-management')
+  .get(middleware.authentication, userController.viewUser)
+  .post(middleware.authentication, userController.blockUser)
+  .put(middleware.authentication, userController.activeUser)
 
 
+//CATEGORY MANAGEMENT-ADMIN SIDE
+router.route('/category-management')
+  .get(middleware.authentication, productController.getCategoryData)
+  .post(middleware.authentication, productController.addCategory)
+  .delete(middleware.authentication, productController.deleteCategory)
+  .put(middleware.authentication, productController.editCategory)
 
 
-router.route('/Manage_Category')
-  .get(midddleware.authentication, productController.getCategoryData)
+//SUB CATEGORY MANAGEMENT-ADMIN SIDE
+router.route('/sub-category')
+  .post(middleware.authentication, productController.addSubCategory)
+  .delete(middleware.authentication, productController.deleteSubCategory)
 
-router.route('/Add_Category')
-  .post(midddleware.authentication, productController.addCategory)
+//PRODUCT MANAGEMENT-ADMIN SIDE 
+router.route('/product-management')
+  .get(middleware.authentication, productController.getProductData)
+  .post(middleware.authentication, upload.array("image", 3), productController.addProduct)
+  .delete(middleware.authentication, productController.deleteProduct)
+router.route('/edit-product/:_id')
+  .get(middleware.authentication, productController.editProduct)
+  .post(middleware.authentication, upload.array("image", 3), productController.editProductData)
 
-router.route('/delete-category/:_id')
-  .get(midddleware.authentication, productController.deleteCategory)
+//USER HOME MANAGEMENT-ADMIN SIDE
+router.route('/user-home-management')
+  .get(middleware.authentication, userController.viewHomeEdit)
+  .post(middleware.authentication, carouselUpload.array("image", 3), userController.curouselEdit)
 
-router.route('/edit_Category/:_id')
-  .post(midddleware.authentication, productController.editCategory)
+//COUPON MANAGEMENT-ADMIN SIDE
+router.route('/coupon-management')
+  .get(middleware.authentication, userController.viewCouponData)
+  .post(middleware.authentication, userController.addCoupon)
+  .delete(middleware.authentication, userController.deleteCoupon)
 
+router.route('/editCoupon/:_id')
+  .get(middleware.authentication, userController.editCoupon)
+  .post(middleware.authentication, userController.editCouponData)
 
+//ORDER MANAGEMENT-ADMIN SIDE
+router.route('/orders-management')
+  .get(middleware.authentication, orderController.getOrders)
+  .post(middleware.authentication, orderController.changePaymentStatus)
 
-router.route('/Add_SubCategory')
-  .post(midddleware.authentication, productController.addSubCategory)
+router.route('/orderCancel')
+  .post(middleware.authentication, orderController.cancelOrder)
 
-router.route('/delete-sub-category/:_id')
-  .get(midddleware.authentication, productController.deleteSubCategory)
+router.route('/viewOrder/:_id')
+  .get(middleware.authentication, orderController.viewOrder)
 
+//VIEW SALES REPORT-ADMIN-SIDE
+router.route('/sales-report')
+  .get(middleware.authentication, orderController.salesReport)
 
-router.route('/Manage_Product')
-  .get(midddleware.authentication, productController.getProductData)
-
-router.route('/Add_Product',)
-  .post(midddleware.authentication, upload.array("image", 3), productController.addProduct)
-
-router.route('/editproduct/:_id')
-  .get(midddleware.authentication, productController.editProduct)
-
-router.route('/editproduct/:_id')
-  .post(midddleware.authentication, upload.array("image", 3), productController.editProductData)
-
-router.get('/deleteproduct/:_id')
-  .get(midddleware.authentication, productController.deleteProduct)
-
-
-
-router.route('/Manage_userHome')
-  .get(midddleware.authentication, userController.viewHomeEdit)
-
-router.route('/editCorousel/:_id')
-  .post(midddleware.authentication, Curouselupload.array("image", 3), userController.curouselEdit)
-
-
-
-router.route('/coupen')
-  .get(midddleware.authentication, userController.viewCoupenData)
-  .post(midddleware.authentication, userController.addCoupen)
-
-router.route('/deletecoupen/:_id')
-  .get(midddleware.authentication, userController.deleteCoupen)
-
-router.route('/editcoupen/:_id')
-  .get(midddleware.authentication, userController.editCoupen)
-
-router.route('/editcoupen/:_id')
-  .post(midddleware.authentication, userController.editCoupenData)
-
-
-
-router.route('/orders')
-  .get(midddleware.authentication, orderController.getOrders)
-  .post(midddleware.authentication, orderController.changePaymentStatus)
-
-router.route('/ordercancel')
-  .post(midddleware.authentication, orderController.cancelOrder)
-
-router.route('/vieworder/:_id')
-  .get(midddleware.authentication, orderController.vieworder)
-
-
-
-router.route('/salesreport')
-  .get(midddleware.authentication, orderController.salesReport)
-
-
-
-router.get("/deleteproduct/:_id", async (req, res) => {
-  let image = await productcontrol.findById({ _id: req.params._id }).lean()
-
-  let final = image.image;
-  final.forEach(data => {
-    fs.unlinkSync('public/' + data);
-  })
-
-  try {
-
-    let data = await productcontrol.findByIdAndDelete({ _id: req.params._id })
-    console.log("deleted");
-    res.redirect('/admin/Manage_Product')
-  }
-  catch {
-    console.log("error occured in product deletion");
-  }
-});
 
 module.exports = router;

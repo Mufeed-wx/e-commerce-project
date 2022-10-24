@@ -25,7 +25,8 @@
                                         <div class="container">
                                             <div class="row justify-content-start">
                                                 <div class="col-lg-10">
-                                                    <h2 class="ad-cur-display-2 " style="color: black;">{{this.Curousel_title.[0]}}</h2>
+                                                    <h2 class="ad-cur-display-2 " style="color: black;">
+                                                        {{this.Curousel_title.[0]}}</h2>
                                                     <a href="" class="btn btn-primary rounded-pill ">Products</a>
                                                     <a href="" class="btn btn-secondary rounded-pill ">Services</a>
                                                 </div>
@@ -39,7 +40,8 @@
                                         <div class="container">
                                             <div class="row justify-content-start">
                                                 <div class="col-lg-10">
-                                                    <h2 class="ad-cur-display-2 " style="color: black;">{{this.Curousel_title.[1]}}</h2>
+                                                    <h2 class="ad-cur-display-2 " style="color: black;">
+                                                        {{this.Curousel_title.[1]}}</h2>
                                                     <a href="" class="btn btn-primary rounded-pill ">Products</a>
                                                     <a href="" class="btn btn-secondary rounded-pill ">Services</a>
                                                 </div>
@@ -53,7 +55,8 @@
                                         <div class="container">
                                             <div class="row justify-content-start">
                                                 <div class="col-lg-7">
-                                                    <h2 class="ad-cur-display-2 " style="color: black;">{{this.Curousel_title.[0]}}</h2>
+                                                    <h2 class="ad-cur-display-2 " style="color: black;">
+                                                        {{this.Curousel_title.[0]}}</h2>
                                                     <a href="" class="btn btn-primary rounded-pill ">Products</a>
                                                     <a href="" class="btn btn-secondary rounded-pill ">Services</a>
                                                 </div>
@@ -90,27 +93,28 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form action="/admin/editCorousel/{{this._id}}" enctype="multipart/form-data" method="post">
+                                    <form action="/admin/user-home-management/?id={{this._id}}"
+                                        enctype="multipart/form-data" method="post">
                                         <div class="mb-3">
                                             <label id="modal_body" for="recipient-name" class="col-form-label">First
                                                 Banner
                                                 Title</label>
-                                            <input type="text" class="form-control" id="recipient-name" value="{{this.Curousel_title.[0]}}"
-                                                name="Curousel_title1" required />
+                                            <input type="text" class="form-control" id="recipient-name"
+                                                value="{{this.Curousel_title.[0]}}" name="Curousel_title1" required />
                                         </div>
                                         <div class="mb-3">
                                             <label id="modal_body" for="recipient-name" class="col-form-label">Second
                                                 Banner
                                                 Title</label>
-                                            <input type="text" class="form-control" id="recipient-name" value="{{this.Curousel_title.[1]}}"
-                                                name="Curousel_title2" required />
+                                            <input type="text" class="form-control" id="recipient-name"
+                                                value="{{this.Curousel_title.[1]}}" name="Curousel_title2" required />
                                         </div>
                                         <div class="mb-3">
                                             <label id="modal_body" for="recipient-name" class="col-form-label">Third
                                                 Banner
                                                 Title</label>
-                                            <input type="text" class="form-control" id="recipient-name" value="{{this.Curousel_title.[2]}}"
-                                                name="Curousel_title3" required />
+                                            <input type="text" class="form-control" id="recipient-name"
+                                                value="{{this.Curousel_title.[2]}}" name="Curousel_title3" required />
                                         </div>
                                         <div class="mb-3">
                                             <label for="recipient-name" class="col-form-label">Select Banner
@@ -130,9 +134,9 @@
                     </div>
                 </div>
 
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
-    </div>
     </div>
 
 </main>

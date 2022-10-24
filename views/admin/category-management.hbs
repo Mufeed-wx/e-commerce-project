@@ -15,7 +15,7 @@
 
 
 <main>
-  <div class="container">
+  <div class="container" id="categoryTable">
     <div class="row justify-content-end">
       <div class="col-md-11">
         {{!-- start modal -------------------------------------------------------------- --}}
@@ -34,14 +34,14 @@
                 </div>
 
                 <div class="modal-body">
-                  <form action="/admin/Add_Category" method="post">
+                  <form action="/admin/category-management" method="post">
                     <div class="mb-3">
                       <label id="modal_body" for="recipient-name" class="col-form-label">Category Name</label>
                       <input type="text" class="form-control" id="recipient-name" value="" name="Category_Name"
                         required />
                     </div>
                     <div class="modal-footer">
-                      {{#if session.categoryexist}}
+                      {{#if session.categoryExist}}
                       <h6>Category Already Exist</h6>
                       {{/if}}
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -54,7 +54,7 @@
           </div>
 
           {{!-- table data---------------------------------------------------------------- --}}
-          <div class="row justify-content-center">
+          <div class="row justify-content-center" id="subCatetegoryTable">
             <div class="col-md-9">
               <div class="row mt-3">
                 <div class="d-flex post-entry">
@@ -84,30 +84,10 @@
                           </td>
 
                           <td>
-                            <a class="btn " type="button" data-bs-toggle="modal"
-                              data-bs-target="#deletecategory{{this._id}}"><i class="icon-cog-p fa fa-trash"></i></a>
+                            <a class="btn " type="button" data-id="{{this._id}}" onclick="deleteCategory(this);"><i
+                                class="icon-cog-p fa fa-trash"></i></a>
                           </td>
-                          {{!-- modal category----------------------------------- --}}
-                          <div id="deletecategory{{this._id}}" class="modal fade">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  <h1>Delete category of {{this.Category_Name}}</h1>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                                  <a href="/admin/delete-category/{{this._id}}"><button class="btn btn-secondary"
-                                      type="submit">Delete</button></a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
                           {{!-- EDIT CATEGORY MODAL -----------------------------}}
                           <div class="modal fade" id="editCategoryModal{{this._id}}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -124,8 +104,8 @@
                                     <div class="mb-3">
                                       <label id="modal_body" for="recipient-name" class="col-form-label">Category
                                         Name</label>
-                                      <input type="text" class="form-control" id="recipient-name"
-                                        value="{{this.Category_Name}}" name="Category_Name" required />
+                                      <input type="text" class="form-control" id="cname" value="{{this.Category_Name}}"
+                                        name="Category_Name" onkeyup="getValue(this)" required />
                                     </div>
                                     <div class="modal-footer">
                                       {{#if session.categoryexist}}
@@ -133,7 +113,8 @@
                                       {{/if}}
                                       <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                      <button type="submit" class="btn btn-primary">Edit</button>
+                                      <button type="button" class="btn btn-primary" data-id="{{this._id}}"
+                                        onclick="editCategory(this);">Edit</button>
                                     </div>
                                   </form>
                                 </div>
@@ -168,7 +149,7 @@
                   </div>
 
                   <div class="modal-body">
-                    <form action="/admin/Add_SubCategory" method="post">
+                    <form action="/admin/sub-category" method="post">
                       <div class="mb-3">
                         <label id="modal_body" for="recipient-name" class="col-form-label">Sub Category Name</label>
                         <input type="text" class="form-control" id="recipient-name" value="" name="Sub_Category_Name"
@@ -234,33 +215,9 @@
                             </td>
 
                             <td>
-                              <a class="btn " type="button" data-bs-toggle="modal"
-                                data-bs-target="#deletesubcategory{{this._id}}"><i
+                              <a class="btn " type="button" data-id="{{this._id}}" onclick="deleteSubCategory(this);"><i
                                   class="icon-cog-p fa fa-trash"></i></a>
                             </td>
-                            {{!-- modal category-----delete subcategory------------------------------ --}}
-                            <div id="deletesubcategory{{this._id}}" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                      aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <h1>Delete category of {{this.Sub_Category_Name}}</h1>
-
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                      data-bs-dismiss="modal">Close</button>
-
-                                    <a href="/admin/delete-sub-category/{{this._id}}"><button class="btn btn-secondary"
-                                        type="submit">Delete</button></a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                             {{!-- EDIT CATEGORY MODAL --------edit-sub-categories---------------------}}
                             <div class="modal fade" id="editsubcategory{{this._id}}{{session.categorydata}}"
                               tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

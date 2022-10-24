@@ -6,7 +6,7 @@ const userController = require('../controller/user/user-controller')
 const productController = require('../controller/user/product-controller')
 const profileController = require('../controller/user/profile-controller')
 const paymentController = require('../controller/user/payment-controller')
-const wishlistController = require('../controller/user/vishlist-controller')
+const wishlistController = require('../controller/user/wishlist-controller')
 const cartController = require('../controller/user/cart-controller')
 const orderController = require('../controller/user/order-controller')
 
@@ -17,7 +17,7 @@ const wishlist = require('../models/wishlist-model');
 
 router.route('/')
   .get(userController.verificationUser)
-  .post(userController.verificationUserlogin)
+  .post(userController.verificationUserLogin)
 
 router.route('/login')
   .get(userController.userLogin)

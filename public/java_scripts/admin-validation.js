@@ -125,11 +125,3 @@ function validateProductDiscount() {
     return true
 }
 
-function validateProductForm() {
-    if (!validateProductName() || !validateProductDescription() || !validateProductImage() || !validateProductDiscount() || !validateProductPrize() || !validateProductLimit() || !validateProductStock()) {
-        submitproductError.style.display = 'block'
-        submitproductError.innerHTML = 'Please fill the form';
-        setTimeout(function () { submitError.style.display = 'none' }, 3000)
-        return false;
-    }
-}

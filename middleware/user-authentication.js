@@ -1,5 +1,4 @@
-var session = require('express-session');
-var showmodal = require('../public/javascripts/userManagement')
+const session = require('express-session');
 
 function userAuthentication(req, res, next) {
     session = req.session;

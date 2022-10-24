@@ -26,40 +26,40 @@ let userSchema = new Schema({
   User_status: {
     type: Boolean,
   },
-  address :[{
-    name : {
+  address: [{
+    name: {
       type: String,
     },
     mobile_number: {
       type: Number,
     },
-    pincode : {
-      type : Number,
+    pincode: {
+      type: Number,
     },
-    street : {
-      type : String,
+    street: {
+      type: String,
     },
-    landmark : {
-      type : String,
+    landmark: {
+      type: String,
     },
-    city : {
-      type : String,
+    city: {
+      type: String,
     },
-    country : {
-      type : String,
+    country: {
+      type: String,
     },
-    state : {
-      type : String,
+    state: {
+      type: String,
     },
   }],
-    coupons:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'coupen',
-    }],
+  coupons: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'coupen',
+  }],
   button: {
     type: String,
   },
-});
+}, { timestamps: true });
 
 const adduser = mongoose.model('user', userSchema);
 module.exports = adduser;

@@ -1,62 +1,58 @@
 const express = require("express");
 const { ObjectId } = require("mongodb");
 const router = express.Router();
-const adminhelper = require("../../helpers/admin-helper");
+const adminHelper = require("../../helpers/admin-helper");
 const productHelper = require("../../helpers/product-helpers");
-const multer = require("multer");
-const productcontrol = require('../../models/product-modal')
 const userHomeHelper = require("../../helpers/user-home-helper")
 var fs = require('fs')
-const coupenmodel = require('../../models/coupen-model');
 
-const authentication = require('../../middleware/admin-authentication');
 
 module.exports = {
+    // Admin verification
     verification: async (req, res, next) => {
         try {
             if (req.session.admin) {
                 session = req.session;
-                console.log(session.adminnotfound, 'kakakakak');
-                await adminhelper.salesReport((data) => {
-                    console.log("dataa", data);
-                    res.render("admin/adminhome", { session, admin: true, data });
+                await adminHelper.salesReport((data) => {
+                    res.render("admin/dashboard", { session, admin: true, data });
                 })
 
             } else {
-                res.redirect("/admin/adminloginpage");
+                res.redirect("/admin/login");
             }
         }
         catch (err) {
             next(err)
         }
     },
-    verificationlogin: (req, res, next) => {
+
+    // View admin login page
+    viewLoginPage: (req, res, next) => {
         try {
             if (req.session.admin) {
-                console.log('ja');
                 res.redirect("/admin");
             } else {
                 session = req.session;
-                res.render("admin/adminlogin", { session, admin: true });
+                res.render("admin/login-page", { session, admin: true });
             }
         }
         catch (err) {
             next(err)
         }
     },
-    loginData: (req, res, next) => {
+
+    // verification of admin login details
+    verifyLoginData: (req, res, next) => {
         try {
-            adminhelper.adminlogin(req.body).then((response) => {
+            adminHelper.verifyLogin(req.body).then((response) => {
                 if (response.status) {
                     session = req.session;
-                    req.session.adminnotfound = false;
+                    req.session.adminNotFound = false;
                     req.session.admin = response.admin;
-                    req.session.adminrview = true;
                     res.redirect("/admin");
                 } else {
-                    console.log("haaaaaaaaaaaaaaaa");
-                    req.session.adminnotfound = true;
-                    res.redirect("/admin/adminloginpage");
+                    req.session.adminNotFound = true;
+                    res.redirect("/admin/login");
                 }
             });
         }
@@ -75,11 +71,10 @@ module.exports = {
     },
     blockUser: (req, res, next) => {
         try {
-            let userid = req.params.id;
-            console.log(userid);
-            adminhelper.block_user(userid).then((userdata) => {
-                req.session.user.User_status = false;
-                res.redirect("/admin/view_user");
+            let userId = req.body.id;
+            adminHelper.block_user(userId).then((response) => {
+
+                res.json({ status: 200 })
             });
         }
         catch (err) {
@@ -88,12 +83,11 @@ module.exports = {
     },
     activeUser: (req, res, next) => {
         try {
-            let userid = req.params.id;
+            let userid = req.body.id;
             console.log(userid);
             console.log("active");
-            adminhelper.active_user(userid).then((userdata) => {
-                req.session.user.User_status = true;
-                res.redirect("/admin/view_user");
+            adminHelper.active_user(userid).then((userdata) => {
+                res.json({ status: 200 })
             });
         }
         catch (err) {
@@ -103,12 +97,10 @@ module.exports = {
     viewUser: (req, res, next) => {
         try {
             if (req.session.admin) {
-                adminhelper.getuserdata().then((data) => {
-                    console.log("vaaaaam");
-                    console.log(data);
+                adminHelper.getUserData().then((data) => {
                     session = req.session;
-                    session.userdata = data;
-                    res.render("admin/view_user", { session, admin: true });
+                    session.userData = data;
+                    res.render("admin/user-management", { session, admin: true });
                 });
             } else {
                 res.redirect("/admin");
@@ -120,11 +112,12 @@ module.exports = {
     },
     viewHomeEdit: (req, res, next) => {
         try {
+            console.log('hshshsh', req.query.id);
             userHomeHelper.getCurousel().then((data) => {
                 session = req.session;
                 let banner = data;
                 console.log("find data", banner);
-                res.render("admin/manage_UserHome", { banner, admin: true })
+                res.render("admin/user-home-management", { banner, admin: true })
             })
         }
         catch (err) {
@@ -141,11 +134,11 @@ module.exports = {
                 req.body.Curousel_title2,
                 req.body.Curousel_title2],
                 image: array,
-                _id: req.params._id,
+                _id: req.query.id,
             }
             userHomeHelper.addCurousel(data).then((response) => {
                 console.log("Successfully Stored curouse");
-                res.redirect("/admin/Manage_userHome")
+                res.redirect("/admin/user-home-management")
             }).catch((err) => {
                 console.log("error found at curousel controller");
             })
@@ -154,31 +147,30 @@ module.exports = {
             next(err)
         }
     },
-    viewCoupenData: (req, res, next) => {
+    viewCouponData: (req, res, next) => {
         try {
             productHelper.getCoupons((data) => {
-                console.log("data", data);
-                res.render("admin/manage-coupen", { session, admin: true, data })
+                res.render("admin/coupon-management", { session, admin: true, data })
             })
         }
         catch (err) {
             next(err)
         }
     },
-    addCoupen: (req, res, next) => {
+    addCoupon: (req, res, next) => {
         try {
             console.log(req.body, 'kkkkkkkkk');
-            adminhelper.addCoupon(req.body, async (err, response) => {
+            adminHelper.addCoupon(req.body, async (err, response) => {
                 if (err) {
                     console.log("error")
                 } else {
                     if (response) {
                         console.log('reached', response);
-                        res.render("admin/manage-coupen", { admin: true })
+                        res.render("admin/coupon-management", { admin: true })
                     }
                     else {
                         console.log('coupen exist')
-                        res.render("admin/manage-coupen", { admin: true })
+                        res.render("admin/coupon-management", { admin: true })
                     }
                 }
             })
@@ -188,29 +180,29 @@ module.exports = {
             next(err)
         }
     },
-    deleteCoupen: (req, res, next) => {
+    deleteCoupon: (req, res, next) => {
         try {
-            id = req.params._id
+            id = req.body.id
             productHelper.deleteCoupon(id, (response) => {
-                res.redirect('/admin/coupen')
+                res.json({ status: 200 })
             })
         }
         catch (err) {
             next(err)
         }
     },
-    editCoupen: (req, res, next) => {
+    editCoupon: (req, res, next) => {
         try {
             id = req.params._id
             productHelper.editCoupon(id, (data) => {
-                res.render('admin/coupen-edit', { session, admin: true, data })
+                res.render('admin/edit-coupon', { session, admin: true, data })
             })
         }
         catch (err) {
             next(err)
         }
     },
-    editCoupenData: (req, res, next) => {
+    editCouponData: (req, res, next) => {
         try {
             id = req.params._id
             data = req.body

@@ -4,14 +4,14 @@
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body  text-center">
-            <form action="/admin/adminloginpage" method="post">
+            <form action="/admin/login" method="post">
 
               <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
               <p class="text-white-50 mb-3">Please enter your login and password!</p>
 
               <div class="form-outline form-white mb-2">
                 <input type="email" id="typeEmailX" class="form-control form-control-md "
-                  style="width: 22rem;margin-left: 30px; " name="mailid" required />
+                  style="width: 22rem;margin-left: 30px; " name="email" required />
                 <label class="form-label" for="typeEmailX">Email</label>
               </div>
 
@@ -20,7 +20,7 @@
                   style="width: 22rem;margin-left: 30px; " name="password" required />
                 <label class="form-label" for="typePasswordX">Password</label>
               </div>
-              {{#if session.adminnotfound}}
+              {{#if session.adminNotFound}}
               <p class="text-white">Invalid username or password</p>
               {{/if}}
               <div class="">

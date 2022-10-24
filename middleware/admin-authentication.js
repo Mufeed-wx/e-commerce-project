@@ -1,4 +1,4 @@
-var session = require('express-session');
+const session = require('express-session');
 const multer = require('multer');
 
 module.exports.authentication = (req, res, next) => {
@@ -24,7 +24,7 @@ module.exports.storage = multer.diskStorage({
 });
 
 
-module.exports.StorageCurousel = multer.diskStorage({
+module.exports.storageCarousel = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "public/img/curousel");
     },

@@ -1,5 +1,5 @@
 <main>
-    <div class="container">
+    <div class="container" id="couponManagement">
         <div class="row justify-content-end">
             <div class="col-md-11">
                 {{!-- start modal -------------------------------------------------------------- --}}
@@ -20,7 +20,7 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form action="/admin/coupen" method="post">
+                                    <form action="/admin/coupon-management" method="post">
                                         <div class="mb-3">
                                             <label id="modal_body" for="recipient-name" class="col-form-label">Coupen
                                                 Name</label>
@@ -87,13 +87,12 @@
                                                 <td>{{this.Discountprice}}</td>
                                                 <td>
                                                     <a class="btn " type="button"
-                                                        href="/admin/editcoupen/{{this._id}}"><i
+                                                        href="/admin/editCoupon/{{this._id}}"><i
                                                             class="icon-cog-p fas fa-edit "></i></a>
                                                 </td>
                                                 <td>
-                                                    <a class="btn " type="button"
-                                                        href="/admin/deletecoupen/{{this._id}}"
-                                                        onclick="return confirm('Are you want to edit?')">
+                                                    <a class="btn " type="button" data-id="{{this._id}}"
+                                                        onclick="deleteCoupon(this);">
                                                         <i class="icon-cog-p fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
@@ -108,4 +107,3 @@
                 </div>
             </div>
 </main>
-

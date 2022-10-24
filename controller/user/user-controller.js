@@ -40,7 +40,7 @@ module.exports = {
         }
 
     },
-    verificationUserlogin: (req, res, next) => {
+    verificationUserLogin: (req, res, next) => {
         try {
             userhelper.userlogin(req.body).then((response) => {
                 if (response.status) {
