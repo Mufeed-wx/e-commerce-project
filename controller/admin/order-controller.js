@@ -2,6 +2,7 @@ var session = require('express-session');
 const orderModel = require('../../models/order-model')
 const productHelper = require('../../helpers/product-helpers');
 const adminHelper = require("../../helpers/admin-helper");
+const { ObjectId } = require('mongodb');
 
 module.exports = {
     //VIEW ORDER MANAGEMENT PAGE
@@ -66,13 +67,12 @@ module.exports = {
     //CANCEL ORDERS
     cancelOrder: async (req, res, next) => {
         try {
+            var oid = (req.body.id).trim();
             await orderModel.updateOne(
-                { _id: req.body.id },
+                { _id: oid },
                 { $set: { orderStatus: "Cancelled", paymentStatus: "Cancelled" } }
-                , (response) => {
-                    console.log(response);
-                    res.json({ msg: 'success' });
-                });
+            );
+            res.json({ msg: 'success' });
         }
         catch (err) {
             next(err)

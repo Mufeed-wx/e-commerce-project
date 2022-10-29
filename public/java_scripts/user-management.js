@@ -179,7 +179,7 @@ function checkoutfinal() {
     success: function (response) {
       console.log("cod payment");
       if (response.CODstatus) {
-        location.href = '/myorders'
+        location.href = '/orders'
       }
       else {
         console.log("payment");
@@ -514,7 +514,7 @@ function cancelOrderAdmin(id) {
         success: function (response) {
           if (response.msg == 'success') {
             console.log('sucess');
-            location.href = '/admin/orders'
+            location.href = '/admin/orders-management'
           }
         },
         error: function (response) {
