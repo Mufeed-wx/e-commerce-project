@@ -68,7 +68,6 @@ module.exports = {
                 if (data.length != 0) {
                     var couponExist = false;
                     let coupon = await userModel.findOne({ _id: id }, { _id: 0, coupons: 1 }).lean()
-                    console.log(coupen, "aa", coupen.coupons[0]);
                     for (let i = 0; i < coupon.coupons.length; i++) {
                         if (String(coupon.coupons[i]) === String(data[0]._id)) {
                             couponExist = true;
@@ -83,6 +82,7 @@ module.exports = {
                     }
 
                 } else {
+                    console.log('jjj');
                     res.json({ msg: 'couponNotFound' });
                 }
             }

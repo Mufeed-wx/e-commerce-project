@@ -137,7 +137,10 @@ function coupenApply() {
     success: function (response) {
       if (response.msg == 'success') {
         console.log("coupen verified")
-        alert('coupon verified Successfully')
+        Swal.fire({
+          icon: 'success',
+          text: 'Coupen applied successfully',
+        })
         console.log("data", response.data)
         discount_value = response.data[0].Discountprice
         console.log(discount_value);
@@ -151,14 +154,26 @@ function coupenApply() {
         $("div.promotion_applied").show()
         applied.textContent = response.data[0].Discountprice
       } else if (response.msg == 'couponExist') {
-        alert('coupon already used')
-      } else if (response.msg == 'coupennotfound') {
-        alert("coupon code is invalid")
+        Swal.fire({
+          icon: 'info',
+          text: 'coupon already used',
+        })
+      } else if (response.msg == 'couponNotFound') {
+        Swal.fire({
+          icon: 'error',
+          text: 'coupon code is invalid',
+        })
       } else if (response.msg == 'couponApplied') {
-        alert("coupon already applied")
+        Swal.fire({
+          icon: 'info',
+          text: 'coupon already applied',
+        })
       }
       else {
-        console.log("coupon id is fake")
+        Swal.fire({
+          icon: 'error',
+          text: 'coupon id is fake',
+        })
       }
     },
   });
