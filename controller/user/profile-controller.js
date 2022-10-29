@@ -7,7 +7,7 @@ const userHelper = require('../../helpers/user-helper');
 const bcrypt = require('bcrypt');
 
 module.exports = {
-    viewprofile: async (req, res, next) => {
+    viewProfile: async (req, res, next) => {
         try {
             session = req.session;
             const id = req.session.user._id;
@@ -82,7 +82,7 @@ module.exports = {
         const ID = req.session.user._id;
         try {
             await usermodel.findOneAndUpdate({ _id: ID }, { $push: { address: req.body } })
-            res.redirect('/viewuseraddress')
+            res.redirect('/view-address')
         }
         catch (err) {
             next(err)
@@ -100,7 +100,7 @@ module.exports = {
             console.log('err');
         }
     },
-    editUserAddressData: async (req, res, next) => {
+    editAddress: async (req, res, next) => {
         try {
             const ID = req.session.user._id;
             const addressId = req.params._id
@@ -119,7 +119,7 @@ module.exports = {
                     },
                 }
             );
-            res.redirect('/viewuseraddress')
+            res.redirect('/view-address')
         }
         catch (err) {
             next(err)
@@ -136,10 +136,11 @@ module.exports = {
                     $set: {
                         User_Name: req.body.User_Name,
                         User_Email: req.body.User_Email,
-                        Company_Name: req.body.Company_Name
+                        Company_Name: req.body.Company_Name,
+                        Mobile_Number: req.body.Mobile_Number
                     }
                 })
-            res.redirect('/viewprofile')
+            res.redirect('/profile')
 
         }
         catch (err) {

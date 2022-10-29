@@ -1,23 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const adminhelper = require("../../helpers/admin-helper");
+const adminHelper = require("../../helpers/admin-helper");
 const productHelper = require("../../helpers/product-helpers");
 const multer = require("multer");
-const productcontrol = require('../../models/product-modal')
-const productModel = require('../../models/product-modal')
-
+const productModel = require('../../models/product-model')
 var fs = require('fs')
 
-
 module.exports = {
+    //VIEW PRODUCT MANAGEMENT PAGE
     getProductData: (req, res, next) => {
         try {
-            adminhelper.getcategory().then((category) => {
-                adminhelper.getsubcategory().then((subcategory) => {
-                    productHelper.getproduct().then((product) => {
+            adminHelper.getCategory().then((category) => {
+                adminHelper.getSubCategory().then((subcategory) => {
+                    productHelper.getProduct().then((product) => {
                         session = req.session;
-                        session.categorydata = category;
-                        session.subcategorydata = subcategory;
+                        session.categoryData = category;
+                        session.subCategoryData = subcategory;
                         session.product = product;
                         res.render("admin/product-management", { session, admin: true });
                     });
@@ -28,13 +26,14 @@ module.exports = {
             next(err)
         }
     },
+    //VIEW CATEGORY MANAGEMENT
     getCategoryData: (req, res, next) => {
         try {
             if (req.session.admin) {
-                adminhelper.getcategory().then((category) => {
-                    adminhelper.getsubcategory().then((subcategory) => {
-                        session.categorydata = category;
-                        session.subcategorydata = subcategory;
+                adminHelper.getCategory().then((category) => {
+                    adminHelper.getSubCategory().then((subcategory) => {
+                        session.categoryData = category;
+                        session.subCategoryData = subcategory;
                         res.render("admin/category-management", { session, admin: true });
                     });
                 });
@@ -46,13 +45,13 @@ module.exports = {
             next(err)
         }
     },
+    //ADD CATEGORY DATA
     addCategory: (req, res, next) => {
         try {
             session = req.session;
-            adminhelper.addCategory(req.body).then((response) => {
+            adminHelper.addCategory(req.body).then((response) => {
                 if (response.categoryExist) {
                     req.session.categoryExist = true;
-
                     res.redirect("/admin/category-management");
                 } else {
                     console.log("category stored");
@@ -65,12 +64,12 @@ module.exports = {
             next(err)
         }
     },
+    //DELETE SINGLE CATEGORY
     deleteCategory: (req, res, next) => {
         try {
-            let userid = req.body.id;
-            adminhelper.deletecategory(userid).then((data) => {
+            let userId = req.body.id;
+            adminHelper.deleteCategory(userId).then((data) => {
                 if (data) {
-                    console.log("deleted");
                     res.json({ status: 200 })
                 } else {
                     console.log(data);
@@ -81,16 +80,16 @@ module.exports = {
             next(err)
         }
     },
+    //EDIT CATEGORY
     editCategory: (req, res, next) => {
         try {
             session = req.session;
-            adminhelper.editCategory(req.body).then((response) => {
-                if (response.categoryexist) {
-                    req.session.categoryexist = true;
+            adminHelper.editCategory(req.body).then((response) => {
+                if (response.categoryExist) {
+                    req.session.categoryExist = true;
                     res.redirect("/admin/category-management");
                 } else {
-                    console.log("category edited");
-                    req.session.categoryexist = false;
+                    req.session.categoryExist = false;
                     res.json({ status: 200 })
                 }
             });
@@ -99,15 +98,16 @@ module.exports = {
             next(err)
         }
     },
+    //ADD SUBCATEGORY
     addSubCategory: (req, res, next) => {
         try {
-            adminhelper.addSubCategory(req.body).then((response) => {
-                if (response.subcategoryexist) {
-                    req.session.subcategoryexist = true;
+            adminHelper.addSubCategory(req.body).then((response) => {
+                if (response.subcategoryExist) {
+                    req.session.subcategoryExist = true;
                     res.redirect("/admin/category-management");
                 } else {
                     console.log("subcategory stored");
-                    req.session.subcategoryexist = false;
+                    req.session.subcategoryExist = false;
                     res.redirect("/admin/category-management");
                 }
             });
@@ -116,13 +116,12 @@ module.exports = {
             next(err)
         }
     },
+    //DELETE SINGLE SUBCATEGORY
     deleteSubCategory: (req, res, next) => {
         try {
-            let userid = req.body.id;
-            console.log('id', userid);
-            adminhelper.deletesubcategory(userid).then((data) => {
+            let userId = req.body.id;
+            adminHelper.deleteSubcategory(userId).then((data) => {
                 if (data) {
-                    console.log("delete subcategory");
                     res.json({ status: 200 })
                 } else {
                     console.log(data);
@@ -133,15 +132,15 @@ module.exports = {
             next(err)
         }
     },
+    //ADD PRODUCT DATA
     addProduct: (req, res, next) => {
         try {
             const images = req.files;
             array = images.map((value) => value.filename);
             req.body.image = array;
             productHelper
-                .addproduct(req.body)
+                .addProduct(req.body)
                 .then((response) => {
-                    console.log("successfully stored product");
                     res.redirect('/admin/product-management')
                 })
                 .catch((err) => {
@@ -152,13 +151,14 @@ module.exports = {
             next(err)
         }
     },
+    //VIEW PRODUCT EDIT PAGE
     editProduct: (req, res, next) => {
         try {
-            productHelper.getproductByid(req.params).then((productDataByEdit) => {
-                adminhelper.getcategory().then((category) => {
+            productHelper.getProductById(req.params).then((productDataByEdit) => {
+                adminHelper.getCategory().then((category) => {
                     session = req.session;
                     session.productDataByEdit = productDataByEdit;
-                    session.categorydata = category;
+                    session.categoryData = category;
                     res.render("admin/product-edit", { session, admin: true });
                 });
             });
@@ -167,6 +167,7 @@ module.exports = {
             next(err)
         }
     },
+    //EDIT SINGLE PRODUCT DATA
     editProductData: (req, res, next) => {
         try {
             const images = req.files;
@@ -174,7 +175,7 @@ module.exports = {
             req.body.image = array;
             let ID = req.params._id;
             req.body._id = ID;
-            productHelper.EditproductByid(req.body).then((Editdata) => {
+            productHelper.EditProductById(req.body).then((data) => {
                 res.redirect('/admin/product-management')
             });
         }
@@ -182,18 +183,15 @@ module.exports = {
             next(err)
         }
     },
+    //DELETE SINGLE PRODUCT
     deleteProduct: async (req, res, next) => {
         let image = await productModel.findById({ _id: req.body.id }).lean()
-
         let final = image.image;
         final.forEach(data => {
             fs.unlinkSync('public/' + data);
         })
-
         try {
-
             let data = await productModel.findByIdAndDelete({ _id: req.body.id })
-            console.log("deleted");
             res.json({ status: 200 })
         }
         catch (err) {

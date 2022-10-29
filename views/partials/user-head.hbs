@@ -152,7 +152,7 @@
                 <a href="\product" class="nav-item nav-link">Products</a>
                 <div class="nav-item dropdown">
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                <a href="/contact" class="nav-item nav-link">Contact Us</a>
             </div>
             <div class=" d-lg-flex ms-2">
                 {{!-- <a class="btn-sm-square bg-white rounded-circle ms-5" href="">
@@ -169,9 +169,9 @@
             {{#if session.user.User_status}}
             <div class="nav-item dropdown">
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a href="/viewprofile" class="dropdown-item">My Profile</a>
+                    <a href="/profile" class="dropdown-item">My Profile</a>
 
-                    <a href="/myorders" class="dropdown-item">My orders</a>
+                    <a href="/orders" class="dropdown-item">My orders</a>
                     <a href="" class="dropdown-item">Settings</a>
                     <a class="dropdown-item" onclick="return logout()">Log
                         Out</a>

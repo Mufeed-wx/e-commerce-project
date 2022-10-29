@@ -1,11 +1,10 @@
 var session = require('express-session');
 const orderModel = require('../../models/order-model')
 const productHelper = require('../../helpers/product-helpers');
-const adminhelper = require("../../helpers/admin-helper");
-const { isObjectIdOrHexString } = require('mongoose');
-
+const adminHelper = require("../../helpers/admin-helper");
 
 module.exports = {
+    //VIEW ORDER MANAGEMENT PAGE
     getOrders: async (req, res, next) => {
         try {
             session = req, session
@@ -19,12 +18,12 @@ module.exports = {
             next(err)
         }
     },
+    //CHANGE ORDER STATUS
     changePaymentStatus: async (req, res, next) => {
         try {
             orderId = req.body.id;
-            ordertStatus = req.body.status
-            console.log(req.body);
-            if (ordertStatus == 'Delivered') {
+            orderStatus = req.body.status;
+            if (orderStatus == 'Delivered') {
                 await orderModel.updateOne(
                     { _id: orderId },
                     { $set: { orderStatus: "Delivered", paymentStatus: "Confirmed" } }
@@ -33,7 +32,7 @@ module.exports = {
             } else {
                 await orderModel.updateOne(
                     { _id: orderId },
-                    { $set: { orderStatus: ordertStatus } }
+                    { $set: { orderStatus: orderStatus } }
                 );
                 res.json({ msg: 'success' });
             }
@@ -42,33 +41,31 @@ module.exports = {
             next(err)
         }
     },
+    //VIEW SINGLE ORDER DATA
     viewOrder: async (req, res, next) => {
         id = req.params._id;
         await productHelper.getSingleOrder(id, (data) => {
-            console.log(data.products[0], 'oooo');
             res.render('admin/view-single-order', { session, admin: true, data })
         })
-
     },
+    //VIEW SALES REPORT
     salesReport: async (req, res, next) => {
         try {
-            await adminhelper.salesReport(async (salesdata) => {
+            await adminHelper.salesReport(async (salesData) => {
                 const data = await orderModel.find({ paymentStatus: 'Confirmed' }).sort({ createdAt: -1 })
                     .populate("userID")
                     .populate("products.productId")
                     .lean();
-                console.log(salesdata, "dataa");
-                res.render('admin/sales-report', { admin: true, data, salesdata })
+                res.render('admin/sales-report', { admin: true, data, salesData })
             })
         }
         catch (err) {
             console.log('err');
         }
     },
+    //CANCEL ORDERS
     cancelOrder: async (req, res, next) => {
         try {
-            let tid = req.body.id
-            console.log('sd', tid);
             await orderModel.updateOne(
                 { _id: req.body.id },
                 { $set: { orderStatus: "Cancelled", paymentStatus: "Cancelled" } }
@@ -76,7 +73,6 @@ module.exports = {
                     console.log(response);
                     res.json({ msg: 'success' });
                 });
-
         }
         catch (err) {
             next(err)

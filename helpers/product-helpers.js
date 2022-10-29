@@ -4,7 +4,7 @@ const promise = require("promise")
 const orderModel = require('../models/order-model')
 var fs = require('fs')
 const userModel = require('../models/user-model')
-const productcontrol = require('../models/product-modal')
+const productcontrol = require('../models/product-model')
 const couponModel = require('../models/coupon-model')
 const Razorpay = require("razorpay");
 
@@ -16,7 +16,7 @@ var instance = new Razorpay({
 
 
 module.exports = {
-    addproduct: (product) => {
+    addProduct: (product) => {
         return new promise(async (resolve, reject) => {
             let response = {
             }
@@ -27,14 +27,14 @@ module.exports = {
         })
     },
 
-    getproduct: () => {
+    getProduct: () => {
         return new Promise(async (resolve, reject) => {
             let product = await productcontrol.find().populate('Category_Name').populate('Sub_Category_Name').lean()
             resolve(product)
         })
     },
 
-    getproduct_data: () => {
+    getProductData: () => {
         let product = {
             vegiatable: null,
             fruites: null,
@@ -50,14 +50,14 @@ module.exports = {
         })
     },
 
-    getproductByid: (id) => {
+    getProductById: (id) => {
         return new Promise(async (resolve, reject) => {
             let product = await productcontrol.findById({ _id: id._id }).populate('Category_Name').populate('Sub_Category_Name').lean()
             resolve(product)
         })
     },
 
-    EditproductByid: (data) => {
+    EditProductById: (data) => {
         return new Promise(async (resolve, reject) => {
             let id = data._id;
             let image = await productcontrol.findById({ _id: data._id }).lean()
@@ -118,7 +118,7 @@ module.exports = {
     },
 
     //GENERATE RAZORPAY
-    generateRazorpay: (orderID, amount, cb) => {
+    generateRazorPay: (orderID, amount, cb) => {
         console.log(orderID, amount, 'laaaaaaaaaaaaaaaaaaaaaa');
         try {
             orderID = orderID.toString();

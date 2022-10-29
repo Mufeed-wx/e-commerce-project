@@ -26,7 +26,7 @@ module.exports = {
     }
 
   },
-  addVishlist: (req, res, next) => {
+  addWishlist: (req, res, next) => {
     try {
       session = req.session
       console.log(req.session.user._id, req.body.id, "idddddddss");

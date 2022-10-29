@@ -1,93 +1,88 @@
-var session = require('express-session');
+var session = require('express-session')
 const cartHelpers = require('../../helpers/cart-helpers')
 
 module.exports = {
+  //VIEW USER CART PAGE
   viewCart: (req, res, next) => {
     try {
-      session = req.session;
-      let id = req.session.user._id;
+      session = req.session
+      let id = req.session.user._id
       cartHelpers.getCart(id, (err, data) => {
         if (err) {
-          console.log(err, "jf");
-
+          throw new Error(err)
         } else {
           if (data) {
-            cartHelpers.getCartDataToatalPrize(req.session.user._id, (err, total) => {
-              console.log("hahaah", total);
-              session = req.session;
-              session.cart = data;
-              session.cartTotal = total
-              console.log(session.cartTotal, "ghsdfh");
-              res.render('user/cart', { session, user: true })
-            })
-
+            cartHelpers.cartDataCalculation(
+              req.session.user._id,
+              (err, total) => {
+                session = req.session
+                session.cart = data
+                session.cartTotal = total
+                res.render('user/cart', { session, user: true })
+              }
+            )
           } else {
             res.render('user/cart', { session, user: true })
-            console.log("data not found")
           }
-
         }
-      });
-    }
-    catch (err) {
+      })
+    } catch (err) {
       next(err)
     }
   },
+  //ADD USER CART DATA
   addCart: (req, res, next) => {
     try {
-      console.log("jkbhdf", req.body);
       var data = {
-        productid: req.body.id,
-        userid: req.session.user._id,
-      };
-      console.log(data, "fa");
+        productId: req.body.id,
+        userId: req.session.user._id,
+      }
       cartHelpers.addToCart(data, (err, taskData) => {
         if (err) {
-          res.json({ msg: 'error' });
+          res.json({ msg: 'error' })
         } else {
-          res.json({ msg: 'success' });
+          res.json({ msg: 'success' })
         }
-      });
-    }
-    catch (err) {
+      })
+    } catch (err) {
       next(err)
     }
   },
-  cahngeCartdata: (req, res, next) => {
+  //CHANGE CART QUANTITY
+  cartQty: (req, res, next) => {
     try {
       var data = {
-        productid: req.body.id,
-        userid: req.session.user._id,
+        productId: req.body.id,
+        userId: req.session.user._id,
         value: req.body.value,
-      };
+      }
       cartHelpers.changeCartQty(data, (err, taskData) => {
         if (err) {
-          res.json({ msg: 'error' });
+          res.json({ msg: 'error' })
         } else {
-          res.json({ msg: 'success', data: taskData });
+          res.json({ msg: 'success', data: taskData })
         }
-      });
-    }
-    catch (err) {
+      })
+    } catch (err) {
       next(err)
     }
   },
+  //DELETE CART QUANTITY
   deleteCart: (req, res, next) => {
     try {
-      console.log(req.body, "ggg");
-      console.log("dfs", req.body.id);
-      console.log("dsf", req.session.user._id);
-      cartHelpers.deleteItems(req.body.id, req.session.user._id, (err, taskData) => {
-        if (err) {
-          res.json({ msg: 'error' });
-        } else {
-          res.json({ msg: 'success' });
+      cartHelpers.deleteItems(
+        req.body.id,
+        req.session.user._id,
+        (err, taskData) => {
+          if (err) {
+            res.json({ msg: 'error' })
+          } else {
+            res.json({ msg: 'success' })
+          }
         }
-      });
-    }
-    catch (err) {
+      )
+    } catch (err) {
       next(err)
     }
-  }
-
+  },
 }

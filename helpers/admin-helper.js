@@ -6,7 +6,7 @@ const subCategoryModel = require('../models/sub-category')
 const sessions = require('express-session')
 const bcrypt = require('bcrypt')
 const couponModel = require('../models/coupon-model')
-const productModel = require('../models/product-modal')
+const productModel = require('../models/product-model')
 const orderModel = require('../models/order-model')
 
 module.exports = {
@@ -91,35 +91,32 @@ module.exports = {
             }
         })
     },
-    getcategory: () => {
+    getCategory: () => {
         return new Promise(async (resolve, reject) => {
             let category = await categoryModel.find({}).lean()
             resolve(category)
         })
     },
-    deletecategory: (userid) => {
+    deleteCategory: (userid) => {
         return new Promise(async (resolve, reject) => {
             let data = await categoryModel.findByIdAndDelete({ _id: userid })
             if (data) {
                 resolve(data)
             } else {
-                console.log('error occured deletion')
                 resolve(data)
             }
         })
     },
     editCategory: (category_data) => {
         return new Promise(async (resolve, reject) => {
-
-            console.log('kooooooooooooo', category_data)
             let response = {
-                categoryexist: false,
+                categoryExist: false,
             }
             let user = await categoryModel.findOne({
                 Category_Name: category_data.Category_Name,
             })
             if (user) {
-                response.categoryexist = true
+                response.categoryExist = true
                 resolve(response)
             } else {
                 let user = await categoryModel.findById({ _id: category_data.id })
@@ -127,7 +124,7 @@ module.exports = {
                 user.Category_Name = category_data.Category_Name
                 console.log('dadadada')
                 console.log(user)
-                response.categoryexist = false
+                response.categoryExist = false
                 await categoryModel.updateOne({ _id: category_data.id }, user)
                 resolve(response)
                 //  })
@@ -138,14 +135,14 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             console.log('looooooooooooo')
             let response = {
-                subcategoryexist: false,
+                subcategoryExist: false,
             }
             let user = await subCategoryModel.findOne({
                 Sub_Category_Name: category_data.Sub_Category_Name,
             })
             if (user) {
                 console.log('vaaaaaaaaaaaaaaaaaaaaaaaa')
-                response.subcategoryexist = true
+                response.subcategoryExist = true
                 resolve(response)
             } else {
                 console.log('daaaaaaaaaaaaaaaaaaaaaaa')
@@ -160,14 +157,14 @@ module.exports = {
                 subCategoryModel.create(category).then(async (data) => {
                     console.log('subcategory create')
                     console.log(data)
-                    response.subcategoryexist = false
+                    response.subcategoryExist = false
                     resolve(response)
                 })
             }
         })
     },
 
-    getsubcategory: () => {
+    getSubCategory: () => {
         return new Promise(async (resolve, reject) => {
             let subcategory = await subCategoryModel
                 .find({})
@@ -177,7 +174,7 @@ module.exports = {
             resolve(subcategory)
         })
     },
-    deletesubcategory: (userid) => {
+    deleteSubcategory: (userid) => {
         return new Promise(async (resolve, reject) => {
             let data = await subCategoryModel.findByIdAndDelete({ _id: userid })
             if (data) {

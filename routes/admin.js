@@ -64,7 +64,7 @@ router.route('/edit-product/:_id')
 //USER HOME MANAGEMENT-ADMIN SIDE
 router.route('/user-home-management')
   .get(middleware.authentication, userController.viewHomeEdit)
-  .post(middleware.authentication, carouselUpload.array("image", 3), userController.curouselEdit)
+  .post(middleware.authentication, carouselUpload.array("image", 3), userController.carouselEdit)
 
 //COUPON MANAGEMENT-ADMIN SIDE
 router.route('/coupon-management')

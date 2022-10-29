@@ -2,11 +2,11 @@ const session = require("express-session")
 const { resolve, reject } = require("promise")
 const promise = require("promise")
 const userhomeController = require("../models/carousel-model")
-const productController = require("../models/product-modal")
+const productController = require("../models/product-model")
 var fs = require('fs')
 
 module.exports = {
-    addCurousel: (data) => {
+    addCarousel: (data) => {
         console.log("haaaaaaa", data);
         return new Promise(async (resolve, reject) => {
             let image = await userhomeController.findById({ _id: data._id }).lean()
@@ -20,7 +20,7 @@ module.exports = {
 
         })
     },
-    getCurousel: () => {
+    getCarousel: () => {
         return new promise(async (resolve, reject) => {
             let data = await userhomeController.find().lean()
             resolve(data)

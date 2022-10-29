@@ -108,8 +108,8 @@ function changeCartQty(value) {
   var invalue = value.value
 
   $.ajax({
-    url: '/cahngeCartData',
-    method: 'post',
+    url: '/cart',
+    method: 'put',
     dataType: 'json',
     data: { 'id': data, 'value': invalue },
     success: function (response) {
@@ -130,14 +130,14 @@ function coupenApply() {
   var value = document.getElementById('coupen-apply').value;
   console.log("ahah", value);
   $.ajax({
-    url: '/checkCoupen',
+    url: '/check-coupon',
     method: 'post',
     dataType: 'json',
     data: { 'value': value },
     success: function (response) {
       if (response.msg == 'success') {
         console.log("coupen verified")
-        alert('coupen verified Successfully')
+        alert('coupon verified Successfully')
         console.log("data", response.data)
         discount_value = response.data[0].Discountprice
         console.log(discount_value);
@@ -150,15 +150,15 @@ function coupenApply() {
         $("div.input_promotion").hide()
         $("div.promotion_applied").show()
         applied.textContent = response.data[0].Discountprice
-      } else if (response.msg == 'coupenExist') {
-        alert('Coupen already used')
+      } else if (response.msg == 'couponExist') {
+        alert('coupon already used')
       } else if (response.msg == 'coupennotfound') {
-        alert("coupen code is incorrect")
-      } else if (response.msg == 'coupenapplied') {
-        alert("Coupen already applied")
+        alert("coupon code is invalid")
+      } else if (response.msg == 'couponApplied') {
+        alert("coupon already applied")
       }
       else {
-        console.log("coupen id is fake")
+        console.log("coupon id is fake")
       }
     },
   });
@@ -172,7 +172,7 @@ function checkoutfinal() {
   console.log(total_prize, 'kskjsks');
 
   $.ajax({
-    url: '/finalpayment',
+    url: '/place-order',
     method: 'post',
     dataType: 'json',
     data: { 'total_prize': total_prize },
@@ -223,7 +223,7 @@ function razorpayPayment(order) {
 
   function verifyPayment(payment, order) {
     $.ajax({
-      url: "/verifypayment",
+      url: "/verify-payment",
       method: "post",
       data: {
         payment,
@@ -231,11 +231,11 @@ function razorpayPayment(order) {
       }, success: (response) => {
         if (response.status) {
           setTimeout(() => {
-            location.href = '/myorders'
+            location.href = '/orders'
           }, 300);
         } else {
           $.ajax({
-            url: '/paymentfailed/' + response.orderID,
+            url: '/payment-failed/' + response.orderID,
             method: 'delete',
             success: (response) => {
             }, error: (err) => {
@@ -297,7 +297,7 @@ function deleteaddress(value) {
   var data = $(value).data('id');
 
   $.ajax({
-    url: '/adduseraddress',
+    url: '/add-address',
     method: 'delete',
     dataType: 'json',
     data: { 'id': data },
@@ -397,7 +397,7 @@ function cancelOrder(id) {
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: '/ordercancel/' + id,
+        url: '/cancel-order/' + id,
         method: 'get',
         dataType: 'json',
         data: {},
@@ -427,8 +427,8 @@ function logout() {
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: '/logout',
-        method: 'get',
+        url: '/',
+        method: 'delete',
         dataType: 'json',
         data: {},
         success: function (response) {
@@ -459,7 +459,7 @@ function changeUserPassword() {
 
 
     $.ajax({
-      url: '/changeuserpassword',
+      url: '/change-password',
       method: 'post',
       dataType: 'json',
       data: { 'oldPassword': oldPassword, 'Password': Password, Re_Password: 'Re_Password' },
@@ -553,3 +553,17 @@ function logoutAdmin() {
 }
 
 
+function contact() {
+  Swal.fire({
+    title: 'Do you want to contact our team?',
+    showCancelButton: true,
+    confirmButtonText: 'yes',
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire('Company will contact you')
+    } else if (result.isDenied) {
+      Swal.fire('Cancelled')
+    }
+  })
+}

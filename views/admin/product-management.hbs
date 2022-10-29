@@ -51,7 +51,7 @@
                                         <select class="form-select" id="inputGroupSelect01" name="Category_Name"
                                             required>
 
-                                            {{#each session.categorydata}}
+                                            {{#each session.categoryData}}
                                             <option value="{{this._id}}" name="option">{{this.Category_Name}}
                                             </option>
                                             {{/each}}
@@ -64,7 +64,7 @@
                                         <select class="form-select" id="inputGroupSelect01" name="Sub_Category_Name"
                                             required>
 
-                                            {{#each session.subcategorydata}}
+                                            {{#each session.subCategoryData}}
                                             <option value="{{this._id}}" name="option">
                                                 {{this.Sub_Category_Name}}</option>
                                             {{/each}}

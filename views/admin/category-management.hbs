@@ -70,7 +70,7 @@
                     </thead>
                     <tbody>
                       <div>
-                        {{#each session.categorydata}}
+                        {{#each session.categoryData}}
                         <tr>
 
                           <td id="Cname">{{this.Category_Name}}</td>
@@ -156,7 +156,7 @@
                           required />
                         <select class="form-select" id="inputGroupSelect01" name="Category_Name" required>
 
-                          {{#each session.categorydata}}
+                          {{#each session.categoryData}}
                           <option value="{{this.Category_Name}}" name="option">{{this.Category_Name}}</option>
                           {{/each}}
 
@@ -192,7 +192,7 @@
                       </thead>
                       <tbody>
                         <div>
-                          {{#each session.subcategorydata}}
+                          {{#each session.subCategoryData}}
 
 
                           <tr>
@@ -219,7 +219,7 @@
                                   class="icon-cog-p fa fa-trash"></i></a>
                             </td>
                             {{!-- EDIT CATEGORY MODAL --------edit-sub-categories---------------------}}
-                            <div class="modal fade" id="editsubcategory{{this._id}}{{session.categorydata}}"
+                            <div class="modal fade" id="editsubcategory{{this._id}}{{session.categoryData}}"
                               tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
                                 <div class="modal-content">
@@ -239,7 +239,7 @@
                                         <select class="form-select" id="inputGroupSelect01" name="Category_Name"
                                           required>
 
-                                          {{#each session.categorydata}}
+                                          {{#each session.categoryData}}
                                           <option value="{{this.Category_Name}}" name="option">{{this.Category_Name}}
                                           </option>
                                           {{/each}}

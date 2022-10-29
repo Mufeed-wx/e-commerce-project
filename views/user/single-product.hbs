@@ -1,0 +1,219 @@
+<style>
+    .card {
+        border: none
+    }
+
+    .fa-hert-in {
+        color: rgb(255, 255, 255);
+        font-size: 17px;
+        padding: 8px;
+        background-color: rgb(28, 42, 0);
+        margin-left: 10px;
+        border-radius: 8px;
+    }
+
+    .product {
+        background-color: #eee
+    }
+
+    .brand {
+        font-size: 13px
+    }
+
+    .act-price {
+        color: red;
+        font-weight: 700
+    }
+
+    .dis-price {
+        text-decoration: line-through
+    }
+
+    .about {
+        font-size: 14px
+    }
+
+    .color {
+        margin-bottom: 10px
+    }
+
+    label.radio {
+        cursor: pointer
+    }
+
+    label.radio input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        pointer-events: none
+    }
+
+    label.radio span {
+        padding: 2px 9px;
+        border: 2px solid #ff0000;
+        display: inline-block;
+        color: #ff0000;
+        border-radius: 3px;
+        text-transform: uppercase
+    }
+
+    label.radio input:checked+span {
+        border-color: #ff0000;
+        background-color: #ff0000;
+        color: #fff
+    }
+
+    .btn-danger {
+        background-color: #ff0000 !important;
+        border-color: #ff0000 !important
+    }
+
+    .btn-danger:hover {
+        background-color: #da0606 !important;
+        border-color: #da0606 !important
+    }
+
+    .btn-danger:focus {
+        box-shadow: none
+    }
+
+    .cart i {
+        margin-right: 10px
+    }
+</style>
+<style>
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    /* Hide the default radio button */
+    .container input {
+
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* custom radio button */
+    .check {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: lightgray;
+        border-radius: 50%;
+    }
+
+    .container:hover input~.check {
+        background-color: gray;
+    }
+
+    .container input:checked~.check {
+        background-color: blue;
+    }
+
+    .check:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .container input:checked~.check:after {
+        display: block;
+    }
+
+    .container .check:after {
+        top: 5px;
+        left: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .deliver-to {
+        background-color: #f0c14b;
+        padding: 3px 35px 5px 35px;
+        border-radius: 4px;
+    }
+
+    .deliver-to-span {
+        font-size: 13px;
+        color: black;
+    }
+</style>
+
+
+
+<div class="container-fluid bg-light bg-icon mb-5">
+    <div class="container">
+        <div class='row row-mai  d-flex justify-content-center mt-0 align-items-center h-100'>
+            <div class='col col-lg-12 mt-3 mb-5 mb-lg-0'>
+                <div class='card mb-3' style='border-radius: .5rem;padding: 40px 38px;border-radius: 0px;'>
+
+                    <div class='row g-0'>
+                        <div class='col-md-12'>
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="images p-3">
+                                            <div class="text-center p-4"> <img id="main-image" src="/{{data.image.[0]}}"
+                                                    width="250" /> </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="product p-4">
+                                            <div class="mt-4 mb-3"> <span
+                                                    class="text-uppercase text-muted brand">{{data.Category_Name.Category_Name}}</span>
+                                                <h5 class="text-uppercase">{{data.Product_Name}}</h5>
+                                                <div class="price d-flex flex-row align-items-center"> <span
+                                                        class="act-price">${{data.Product_Prize}}</span>
+                                                    <div class="ml-2"> <small class="dis-price"></small>
+                                                        <span class="ps-3">{{data.Discount}}% OFF</span>
+                                                    </div>
+                                                </div>
+                                                <div class="price d-flex flex-row align-items-center"> <span
+                                                        class="act-price">Order limit</span>
+                                                    <div class="ml-2"> <small class="dis-price"></small>
+                                                        <span class="ps-3">{{data.order_limit}}Kg</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p class="about">{{data.Product_Description}}</p>
+                                            <div class="cart mt-4 align-items-center"> <button type="button"
+                                                    data-id="{{data._id}}" onclick="shoppingCart(this);"
+                                                    class="btn btn-danger text-uppercase mr-2 px-4">Add to
+                                                    cart</button> <i data-id="{{data._id}}"
+                                                    onclick="goDoSomething(this);" class="fas fa-heart fa-hert-in "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function change_image(image) {
+        var container = document.getElementById("main-image");
+        container.src = image.src;
+    }
+    document.addEventListener("DOMContentLoaded", function (event) {
+    });
+</script>

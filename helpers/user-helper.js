@@ -7,7 +7,7 @@ const { resolve, reject } = require('promise');
 const usermodel = require('../models/user-model')
 
 module.exports = {
-  usersignup: (userdata) => {
+  signup: (userdata) => {
     return new Promise(async (resolve, reject) => {
       console.log('NUMBER1', userdata);
       let user = await adduser.findOne({
@@ -40,10 +40,10 @@ module.exports = {
         }
       }
 
-      });
+    });
   },
 
-  userlogin: (logindata) => {
+  login: (logindata) => {
     return new Promise(async (resolve, reject) => {
       let response = {
         status: false,
@@ -72,10 +72,10 @@ module.exports = {
       }
     });
   },
-  getUserData :(id,cb) => {
-     usermodel.findById({_id: id},(err,data) =>{
+  getUserData: (id, cb) => {
+    usermodel.findById({ _id: id }, (err, data) => {
       console.log(data);
-      cb(null,data); 
-    }) 
+      cb(null, data);
+    })
   }
 };

@@ -1,61 +1,60 @@
-    <style>
-        .fa-hert-in {
-            color: rgb(255, 255, 255);
-            font-size: 17px;
-            padding: 8px;
-            background-color: rgb(28, 42, 0);
-            margin-left: 10px;
-            border-radius: 8px;
-        }
-    </style>
-    <!-- Start Modal Add cart -->
-    <div class="modal fade" id="modalAddcart" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col text-right">
-                                <button type="button" class="close modal-close" data-bs-dismiss="modal"
-                                    aria-label="Close">
-                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
-                                </button>
-                            </div>
+<style>
+    .fa-hert-in {
+        color: rgb(255, 255, 255);
+        font-size: 17px;
+        padding: 8px;
+        background-color: rgb(28, 42, 0);
+        margin-left: 10px;
+        border-radius: 8px;
+    }
+</style>
+<!-- Start Modal Add cart -->
+<div class="modal fade" id="modalAddcart" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col text-right">
+                            <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                            </button>
                         </div>
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="modal-add-cart-product-img">
-                                            <img class="img-fluid"
-                                                src="assets/images/product/default/home-1/default-1.jpg" alt="">
-                                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="modal-add-cart-product-img">
+                                        <img class="img-fluid" src="assets/images/product/default/home-1/default-1.jpg"
+                                            alt="">
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="modal-add-cart-info"><i class="fa fa-check-square"></i>Added to cart
-                                            successfully!</div>
-                                        <div class="modal-add-cart-product-cart-buttons">
-                                            <a href="cart.html">View Cart</a>
-                                            <a href="checkout.html">Checkout</a>
-                                        </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="modal-add-cart-info"><i class="fa fa-check-square"></i>Added to cart
+                                        successfully!</div>
+                                    <div class="modal-add-cart-product-cart-buttons">
+                                        <a href="cart.html">View Cart</a>
+                                        <a href="checkout.html">Checkout</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5 modal-border">
-                                <ul class="modal-add-cart-product-shipping-info">
-                                    <li> <strong><i class="icon-shopping-cart"></i> There Are 5 Items In Your
-                                            Cart.</strong></li>
-                                    <li> <strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
-                                    <li class="modal-continue-button"><a href="#" data-bs-dismiss="modal">CONTINUE
-                                            SHOPPING</a></li>
-                                </ul>
-                            </div>
+                        </div>
+                        <div class="col-md-5 modal-border">
+                            <ul class="modal-add-cart-product-shipping-info">
+                                <li> <strong><i class="icon-shopping-cart"></i> There Are 5 Items In Your
+                                        Cart.</strong></li>
+                                <li> <strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
+                                <li class="modal-continue-button"><a href="#" data-bs-dismiss="modal">CONTINUE
+                                        SHOPPING</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- End Modal Add cart -->
+    </div>
+</div> <!-- End Modal Add cart -->
 
 
 <!-- Page Header Start -->
@@ -67,7 +66,7 @@
                 <li class="breadcrumb-item"><a class="text-body" href="/">Home</a></li>
                 <li class="breadcrumb-item"><a class="text-body" href="#">Pages</a></li>
                 <li class="breadcrumb-item text-dark active" aria-current="page">Products</li>
-                
+
             </ol>
         </nav>
     </div>
@@ -83,7 +82,8 @@
                 <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s"
                     style="max-width: 500px;">
                     <h1 class="display-5 mb-3">Our Products</h1>
-                    <p>Organic food, ecological food or biological food are food and drinks produced by methods complying with the standards of organic farming.
+                    <p>Organic food, ecological food or biological food are food and drinks produced by methods
+                        complying with the standards of organic farming.
                     </p>
                 </div>
             </div>
@@ -136,11 +136,14 @@
                                             </div>
                                             <div class="row ">
                                                 <div class="form-group">
-                                                    <div class=""><a  class="cart-btn "data-id="{{this._id}}" onclick="shoppingCart(this);"><i 
-                                class="fas fa-shopping-cart pe-2"></i>Add To Cart</a><a id="option1" data-id="{{this._id}}" onclick="goDoSomething(this);"><i
-                                class="fas fa-heart fa-hert-in fa-spin "></i></a></div>
-                                                    
-                                                    
+                                                    <div class=""><a class="cart-btn " data-id="{{this._id}}"
+                                                            onclick="shoppingCart(this);"><i
+                                                                class="fas fa-shopping-cart pe-2"></i>Add To Cart</a><a
+                                                            id="option1" data-id="{{this._id}}"
+                                                            onclick="goDoSomething(this);"><i
+                                                                class="fas fa-heart fa-hert-in "></i></a></div>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -193,7 +196,14 @@
                                             </div>
                                             <div class="row ">
                                                 <div class="form-group">
-                                                    <button class="btn btn-primary">Add To Cart</button>
+                                                    <div class=""><a class="cart-btn " data-id="{{this._id}}"
+                                                            onclick="shoppingCart(this);"><i
+                                                                class="fas fa-shopping-cart pe-2"></i>Add To Cart</a><a
+                                                            id="option1" data-id="{{this._id}}"
+                                                            onclick="goDoSomething(this);"><i
+                                                                class="fas fa-heart fa-hert-in "></i></a></div>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -210,160 +220,73 @@
                     </div>{{/each}}
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
-<!-- Product End -->
-
- {{!-- TO DO --}}
-{{!-- 
-<!-- Firm Visit Start -->
-<div class="container-fluid bg-primary bg-icon mt-5 py-6">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="display-5 text-white mb-3">Visit Our Firm</h1>
-                <p class="text-white mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
-                    diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat
-                    amet. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.</p>
-            </div>
-            <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
-                <a class="btn btn-lg btn-secondary rounded-pill py-3 px-5" href="">Visit Now</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Firm Visit End -->
 
 
-<!-- Testimonial Start -->
-<div class="container-fluid bg-light bg-icon py-6">
-    <div class="container">
-        <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
-            style="max-width: 500px;">
-            <h1 class="display-5 mb-3">Customer Review</h1>
-            <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-        </div>
-        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-            <div class="testimonial-item position-relative bg-white p-5 mt-4">
-                <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita
-                    erat ipsum et lorem et sit.</p>
-                <div class="d-flex align-items-center">
-                    <img class="flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" alt="">
-                    <div class="ms-3">
-                        <h5 class="mb-1">Client Name</h5>
-                        <span>Profession</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item position-relative bg-white p-5 mt-4">
-                <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita
-                    erat ipsum et lorem et sit.</p>
-                <div class="d-flex align-items-center">
-                    <img class="flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg" alt="">
-                    <div class="ms-3">
-                        <h5 class="mb-1">Client Name</h5>
-                        <span>Profession</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item position-relative bg-white p-5 mt-4">
-                <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita
-                    erat ipsum et lorem et sit.</p>
-                <div class="d-flex align-items-center">
-                    <img class="flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg" alt="">
-                    <div class="ms-3">
-                        <h5 class="mb-1">Client Name</h5>
-                        <span>Profession</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item position-relative bg-white p-5 mt-4">
-                <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita
-                    erat ipsum et lorem et sit.</p>
-                <div class="d-flex align-items-center">
-                    <img class="flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg" alt="">
-                    <div class="ms-3">
-                        <h5 class="mb-1">Client Name</h5>
-                        <span>Profession</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Testimonial End --> --}}
-
-
-  <!-- Footer -->
-  <footer
-          class="text-center text-lg-start text-white"
-          style="background-color: #000000"
-          >
+<!-- Footer -->
+<footer class="text-center text-lg-start text-white" style="background-color: #000000">
     <!-- Grid container -->
     <div class="container p-4 pb-0">
-      <!-- Section: Links -->
-      <section class="">
-        <!--Grid row-->
-        <div class="row">
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 text-white font-weight-bold">
-              Company name
-            </h6>
-            <p> 
-            </p>
-          </div>
-          <!-- Grid column -->
+        <!-- Section: Links -->
+        <section class="">
+            <!--Grid row-->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 text-white font-weight-bold">
+                        Company name
+                    </h6>
+                    <p>
+                    </p>
+                </div>
+                <!-- Grid column -->
 
-          <hr class="w-100 clearfix d-md-none" />
+                <hr class="w-100 clearfix d-md-none" />
 
-          <!-- Grid column -->
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold text-white">Products</h6>
-            <p>
-              <a class="text-white">MDBootstrap</a>
-            </p>
-            <p>
-              <a class="text-white">MDWordPress</a>
-            </p>
-          </div>
-          <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold text-white">Products</h6>
+                    <p>
+                        <a class="text-white">MDBootstrap</a>
+                    </p>
+                    <p>
+                        <a class="text-white">MDWordPress</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
 
-          <hr class="w-100 clearfix d-md-none" />
+                <hr class="w-100 clearfix d-md-none" />
 
-          <!-- Grid column -->
-          <hr class="w-100 clearfix d-md-none" />
+                <!-- Grid column -->
+                <hr class="w-100 clearfix d-md-none" />
 
-          <!-- Grid column -->
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold text-white">Contact</h6>
-            <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-            <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-            <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-          </div>
-          <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold text-white">Contact</h6>
+                    <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+                    <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+                    <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+                    <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                </div>
+                <!-- Grid column -->
 
 
-          
-        </div>
-        <!--Grid row-->
-      </section>
-      <!-- Section: Links -->
+
+            </div>
+            <!--Grid row-->
+        </section>
+        <!-- Section: Links -->
     </div>
     <!-- Grid container -->
 
-  </footer>
-  <!-- Footer -->
+</footer>
+<!-- Footer -->
 </div>
 <!-- End of .container -->
-  </div>
+</div>
 </div>
 <!-- Footer End -->
 

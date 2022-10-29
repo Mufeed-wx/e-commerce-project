@@ -1,41 +1,37 @@
 var session = require('express-session');
 const productHelper = require('../../helpers/product-helpers');
-const userhelper = require('../../helpers/user-helper');
+const userHelper = require('../../helpers/user-helper');
 const profileHelper = require('../../helpers/profile-helper');
 const adminHelper = require('../../helpers/admin-helper');
 const userModel = require('../../models/user-model')
-const coupenmodel = require('../../models/coupon-model');
+const couponModel = require('../../models/coupon-model');
 const cartModel = require('../../models/cart-model');
-const { response } = require('express');
 const orderModel = require('../../models/order-model')
 
 module.exports = {
+    //ADDRESS PAGE OF PLACE ORDER
     addressSelect: async (req, res, next) => {
         try {
             session = req.session;
             id = req.session.user._id;
             const userAddress = await profileHelper.getAddress(id);
-            console.log("sdfaa", userAddress);
             res.render('user/checkout', { session, userAddress, user: true });
         }
         catch (err) {
             next(err)
         }
     },
-    paymentSelect: (req, res) => {
-        res.render('user/select-payment', { user: true });
-    },
+    //FINAL PLACE ORDER PAGE
     finalPayment: async (req, res, next) => {
         try {
             session = req.session;
             const id = req.session.user._id;
-            let addressId = req.session.checkoutaddressid;
-            req.session.coupen = null;
+            let addressId = req.session.checkoutAddressId;
+            req.session.coupon = null;
             session.totalAmount = req.session.cartTotal;
             cartData = req.session.cartTotal
-            console.log("datas", req.session.cart, 'llllll', req.session.cartTotal);
             const orderAddress = await profileHelper.getAddressById(id, addressId)
-            paymentMethod = req.session.paymentmethod
+            paymentMethod = req.session.paymentMethod
             res.render('user/final-payment', { session, orderAddress, paymentMethod, cartData, user: true });
         }
         catch (err) {
@@ -43,82 +39,72 @@ module.exports = {
         }
 
     },
-    checkoutData: (req, res, next) => {
+    //PAYMENT SELECTION OF PLACE ORDER
+    paymentSelect: (req, res, next) => {
         try {
             session = req.session;
-            req.session.checkoutaddressid = req.params._id;
-            console.log('as', req.session.checkoutaddressid);
+            req.session.checkoutAddressId = req.params._id;
             res.render('user/select-payment', { session, user: true })
         }
         catch (err) {
             next(err)
         }
     },
+    //PAYMENT DATA OF PLACE ORDER
     paymentSelectData: (req, res) => {
-        req.session.paymentmethod = req.body.paymentmethod;
-        console.log(req.session.paymentsample);
-        res.redirect('finalpayment')
+        req.session.paymentMethod = req.body.paymentMethod;
+        res.redirect('place-order')
     },
-    checkCoupen: async (req, res, next) => {
-
+    //CHECK COUPON OF PLACE ORDER
+    checkCoupon: async (req, res, next) => {
         try {
-            if (req.session.coupen) {
-                res.json({ msg: 'coupenapplied' });
+            if (req.session.coupon) {
+                res.json({ msg: 'couponApplied' });
             } else {
-                console.log("ghfhg", req.body);
-                ccode = req.body.value
+
+                couponCode = req.body.value
                 id = req.session.user._id;
-                const data = await coupenmodel.find({ code: ccode }).lean()
-                console.log('lalal', data);
+                const data = await couponModel.find({ code: couponCode }).lean()
                 if (data.length != 0) {
-                    console.log("reach");
-                    var coupenExist = false;
-                    let coupen = await userModel.findOne({ _id: id }, { _id: 0, coupons: 1 }).lean()
+                    var couponExist = false;
+                    let coupon = await userModel.findOne({ _id: id }, { _id: 0, coupons: 1 }).lean()
                     console.log(coupen, "aa", coupen.coupons[0]);
-                    for (let i = 0; i < coupen.coupons.length; i++) {
-                        if (String(coupen.coupons[i]) === String(data[0]._id)) {
-                            console.log("haha");
-                            coupenExist = true;
+                    for (let i = 0; i < coupon.coupons.length; i++) {
+                        if (String(coupon.coupons[i]) === String(data[0]._id)) {
+                            couponExist = true;
                             break;
                         }
                     }
-                    if (coupenExist) {
-                        console.log('exist');
-                        res.json({ msg: 'coupenExist' });
+                    if (couponExist) {
+                        res.json({ msg: 'couponExist' });
                     } else {
-                        console.log('true');
-                        req.session.coupen = data;
-                        console.log('kaak', req.session.coupen);
+                        req.session.coupon = data;
                         res.json({ msg: 'success', data: data });
                     }
 
                 } else {
-                    console.log("coupen not found");
-                    res.json({ msg: 'coupennotfound' });
+                    res.json({ msg: 'couponNotFound' });
                 }
             }
-
-
         }
         catch (err) {
             next(err)
         }
-
     },
-    checkout: async (req, res, next) => {
-
+    //FINAL STAGE OF PLACE ORDER
+    placeOrder: async (req, res, next) => {
         console.log(req.body);
         try {
             const data = {
                 userid: req.session.user._id,
-                paymentMethod: req.session.paymentmethod,
+                paymentMethod: req.session.paymentMethod,
                 cartData: req.session.cart,
                 cartTotal: req.session.cartTotal.total,
-                coupen: req.session.coupen,
+                coupen: req.session.coupon,
                 Final_total: req.body.total_prize,
-                address: req.session.checkoutaddressid,
+                address: req.session.checkoutAddressId,
             }
-            if (req.session.paymentmethod == "COD") {
+            if (req.session.paymentMethod == "COD") {
                 productHelper.checkout(data, async (data) => {
                     await cartModel.findByIdAndUpdate(
                         { _id: req.session.cart._id },
@@ -129,40 +115,34 @@ module.exports = {
                     res.json(response);
                 })
             }
-            else if (req.session.paymentmethod == "Razorpay") {
+            else if (req.session.paymentMethod == "Razorpay") {
                 try {
                     productHelper.checkout(data, async (orderData) => {
-                        console.log('dataa', orderData);
-                        req.session.orderid = orderData._id;
-                        productHelper.generateRazorpay(orderData._id, data.Final_total, (response) => {
-                            console.log("razrpay");
-                            console.log(response);
-                            req.session.orderID = response.receipt;
-                            console.log("req.session.orderID", req.session.orderID);
+                        req.session.orderId = orderData._id;
+                        productHelper.generateRazorPay(orderData._id, data.Final_total, (response) => {
+                            req.session.orderId = response.receipt;
                             res.json(response);
                         })
                     })
                 }
                 catch (err) {
-                    console.log("error", err);
+                    throw new Error(err)
                 }
             }
             else {
-                console.log("errra");
+                throw new Error('error')
             }
         }
         catch (err) {
             next(err)
         }
     },
-    verifypayment: (req, res, next) => {
+    //VERIFY USER PAYMENT DATA
+    verifyPayment: (req, res, next) => {
         try {
-            console.log("verify payment");
-            console.log("req.body", req.body);
             productHelper
                 .verifyPayment(req.body, async (response) => {
-                    console.log(response, 'ooooallllllllllllllll');
-                    id = req.session.orderid;
+                    id = req.session.orderId;
                     await orderModel.updateOne(
                         { _id: id },
                         { $set: { paymentStatus: "Confirmed" } }
@@ -176,10 +156,11 @@ module.exports = {
         catch (err) {
             const data = {};
             data.status = false;
-            data.orderID = req.session.orderid;
+            data.orderID = req.session.orderId;
             res.json(data);
         };
     },
+    //ORDER CANCELLATION
     cancelOrder: async (req, res, next) => {
         try {
             id = req.params.id

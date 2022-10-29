@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-
+//CONTROLLERS
 const userController = require('../controller/user/user-controller')
 const productController = require('../controller/user/product-controller')
 const profileController = require('../controller/user/profile-controller')
@@ -10,99 +10,117 @@ const wishlistController = require('../controller/user/wishlist-controller')
 const cartController = require('../controller/user/cart-controller')
 const orderController = require('../controller/user/order-controller')
 
-// middlewares
-
+//MIDDLEWARE
 const userAuthentication = require('../middleware/user-authentication');
 const wishlist = require('../models/wishlist-model');
 
+//MAIN ROUTE
 router.route('/')
   .get(userController.verificationUser)
   .post(userController.verificationUserLogin)
+  .delete(userAuthentication, userController.logout)
 
+//USER-LOGIN-PAGE
 router.route('/login')
   .get(userController.userLogin)
 
+//USER-SIGN-UP
 router.route('/signup')
   .get(userController.signupUser)
   .post(userController.signupUserData)
 
-router.route('/logout')
-  .get(userAuthentication, userController.logout)
-
+//VIEW PRODUCT
 router.route('/product')
   .get(productController.getProduct)
 
-router.route('/viewprofile')
-  .get(userAuthentication, profileController.viewprofile)
+//VIEW-USER-PROFILE
+router.route('/profile')
+  .get(userAuthentication, profileController.viewProfile)
 
-
-router.route('/edituserdata')
+//EDIT-USER-PROFILE-DATA
+router.route('/edit-user-data')
   .get(userAuthentication, profileController.editUserData)
   .post(userAuthentication, profileController.editPersonalData)
 
-router.route('/viewuseraddress')
+//VIEW-USER-ADDRESS
+router.route('/view-address')
   .get(userAuthentication, profileController.viewUserAddress)
 
-
-router.route('/edituseraddress/:_id')
+//EDIT-USER-ADDRESS
+router.route('/edit-user-address/:_id')
   .get(userAuthentication, profileController.editUserAddress)
-  .post(userAuthentication, profileController.editUserAddressData)
+  .post(userAuthentication, profileController.editAddress)
 
-router.route('/adduseraddress')
+//ADD-AND-DELETE-USER-ADDRESS
+router.route('/add-address')
   .get(userAuthentication, profileController.addUserAddress)
   .post(userAuthentication, profileController.addUserAddressData)
   .delete(userAuthentication, profileController.deleteUserAddress)
 
+//CHECKOUT-VIEW-ADDRESS-SELECT-PAGE 
 router.route('/checkout')
   .get(userAuthentication, paymentController.addressSelect)
 
+//CHECKOUT-VIEW-PAYMENT-METHOD-SELECT-PAGE 
 router.route('/checkout/:_id')
-  .get(userAuthentication, paymentController.checkoutData)
-
-router.route('/selectpayment')
   .get(userAuthentication, paymentController.paymentSelect)
 
-router.route('/selectpayment')
+//CHECKOUT-GET-PAYMENT-METHOD
+router.route('/payment-method')
   .post(userAuthentication, paymentController.paymentSelectData)
 
-router.route('/finalpayment')
+//VIEW-AND-GET-FINAL-PAYMENT
+router.route('/place-order')
   .get(userAuthentication, paymentController.finalPayment)
-  .post(userAuthentication, paymentController.checkout)
+  .post(userAuthentication, paymentController.placeOrder)
 
-router.route('/verifypayment')
-  .post(userAuthentication, paymentController.verifypayment)
+//VERIFY-PAYMENT
+router.route('/verify-payment')
+  .post(userAuthentication, paymentController.verifyPayment)
 
-router.route('/paymentfailed/:id')
+//PAYMENT-FAILED
+router.route('/payment-failed/:id')
   .delete(userAuthentication, paymentController.cancelOrder)
 
-router.route('/checkCoupen')
-  .post(userAuthentication, paymentController.checkCoupen)
+//CHECK-COUPON
+router.route('/check-coupon')
+  .post(userAuthentication, paymentController.checkCoupon)
 
+//  WISHLIST-VIEW-AND-DELETE
 router.route('/Wishlist')
   .get(userAuthentication, wishlistController.viewWishlist)
-  .post(userAuthentication, wishlistController.addVishlist)
+  .post(userAuthentication, wishlistController.addWishlist)
   .delete(userAuthentication, wishlistController.deleteWishlist)
 
+//CART-VIEW-AND-DELETE-CHANGE QTY
 router.route('/cart')
   .get(userAuthentication, cartController.viewCart)
   .post(userAuthentication, cartController.addCart)
   .delete(userAuthentication, cartController.deleteCart)
+  .put(userAuthentication, cartController.cartQty)
 
-router.route('/cahngeCartData')
-  .post(userAuthentication, cartController.cahngeCartdata)
-
-router.route('/myorders')
+//VIEW-ORDERS
+router.route('/orders')
   .get(userAuthentication, orderController.viewOrders)
 
-router.route('/vieworders/:_id')
+//VIEW-SINGLE-ORDERS
+router.route('/view-orders/:_id')
   .get(userAuthentication, orderController.viewSingleOrder)
 
-router.route('/ordercancel/:id')
+//CANCEL-ORDER
+router.route('/cancel-order/:id')
   .get(userAuthentication, orderController.cancelOrder)
 
-router.route('/changeuserpassword')
+//CHANGE-USED-PASSWORD
+router.route('/change-password')
   .post(userAuthentication, profileController.changePassword)
 
+//VIEW-SINGLE-PRODUCT
+router.route('/single-product/:_id')
+  .get(userAuthentication, userController.singleProduct)
 
+//CONTACT-PAGE
+router.route('/contact')
+  .get(userController.contactView)
 
 module.exports = router;

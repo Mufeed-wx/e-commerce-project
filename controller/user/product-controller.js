@@ -5,7 +5,7 @@ const userhelper = require('../../helpers/user-helper');
 module.exports = {
     getProduct: (req, res, next) => {
         try {
-            productHelper.getproduct_data().then((product) => {
+            productHelper.getProductData().then((product) => {
                 session = req.session;
                 session.product_data = product;
                 console.log('get product');

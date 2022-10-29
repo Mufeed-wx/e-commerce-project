@@ -13,7 +13,7 @@
             <div class='col col-lg-12 mt-3 mb-5 mb-lg-0'>
                 <div class='card mb-3' style='border-radius: .5rem;padding: 40px 38px;border-radius: 0px;'>
                     <div class='row g-0'>
-                        <form action="/edituserdata" method="post">
+                        <form action="/edit-user-data" method="post">
                             <div class='col-md-12'>
                                 <div class='card-body pl-2'>
                                     <h6>Personal Information</h6>
@@ -22,7 +22,7 @@
                                     <div class='row pt-1'>
                                         <div class='col-6 mb-3'>
                                             <h6>Name</h6>
-                                            <input type="text" name="User_Name" value="{{data.User_Name}}">
+                                            <input type="text" name="User_Name" value="{{session.user.User_Name}}">
                                         </div>
                                         <div class='col-6 mb-3'>
                                             <h6>Email</h6>
@@ -35,7 +35,8 @@
                                         </div>
                                         <div class='col-6 mb-3'>
                                             <h6>Phone</h6>
-                                            <input type="text">
+                                            <input type="text" name="Mobile_Number"
+                                                value="{{session.user.Mobile_Number}}">
                                         </div>
                                     </div>
                                 </div>

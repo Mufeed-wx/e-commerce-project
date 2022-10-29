@@ -6,9 +6,8 @@ const productHelper = require("../../helpers/product-helpers");
 const userHomeHelper = require("../../helpers/user-home-helper")
 var fs = require('fs')
 
-
 module.exports = {
-    // Admin verification
+    //ADMIN VERIFICATION
     verification: async (req, res, next) => {
         try {
             if (req.session.admin) {
@@ -25,8 +24,7 @@ module.exports = {
             next(err)
         }
     },
-
-    // View admin login page
+    //VIEW ADMIN LOGIN PAGE
     viewLoginPage: (req, res, next) => {
         try {
             if (req.session.admin) {
@@ -40,8 +38,7 @@ module.exports = {
             next(err)
         }
     },
-
-    // verification of admin login details
+    //VERIFICATION OF LOGIN DATA
     verifyLoginData: (req, res, next) => {
         try {
             adminHelper.verifyLogin(req.body).then((response) => {
@@ -60,6 +57,7 @@ module.exports = {
             next(err)
         }
     },
+    //ADMIN LOGOUT
     logout: (req, res, next) => {
         try {
             req.session.admin = false;
@@ -69,6 +67,7 @@ module.exports = {
             next(err)
         }
     },
+    //BLOCK USER STATUS
     blockUser: (req, res, next) => {
         try {
             let userId = req.body.id;
@@ -81,12 +80,11 @@ module.exports = {
             next(err)
         }
     },
+    //ACTIVE USER STATUS
     activeUser: (req, res, next) => {
         try {
-            let userid = req.body.id;
-            console.log(userid);
-            console.log("active");
-            adminHelper.active_user(userid).then((userdata) => {
+            let userId = req.body.id;
+            adminHelper.active_user(userId).then((data) => {
                 res.json({ status: 200 })
             });
         }
@@ -94,6 +92,7 @@ module.exports = {
             next(err)
         }
     },
+    //VIEW USER MANAGEMENT PAGE
     viewUser: (req, res, next) => {
         try {
             if (req.session.admin) {
@@ -110,13 +109,12 @@ module.exports = {
             next(err)
         }
     },
+    //VIEW USER GENERAL MANAGEMENT PAGE
     viewHomeEdit: (req, res, next) => {
         try {
-            console.log('hshshsh', req.query.id);
-            userHomeHelper.getCurousel().then((data) => {
+            userHomeHelper.getCarousel().then((data) => {
                 session = req.session;
                 let banner = data;
-                console.log("find data", banner);
                 res.render("admin/user-home-management", { banner, admin: true })
             })
         }
@@ -124,7 +122,8 @@ module.exports = {
             next(err)
         }
     },
-    curouselEdit: (req, res, next) => {
+    //CAROUSEL EDIT DATA
+    carouselEdit: (req, res, next) => {
         try {
             const images = req.files;
             array = images.map((value) => value.filename);
@@ -136,17 +135,17 @@ module.exports = {
                 image: array,
                 _id: req.query.id,
             }
-            userHomeHelper.addCurousel(data).then((response) => {
-                console.log("Successfully Stored curouse");
+            userHomeHelper.addCarousel(data).then((response) => {
                 res.redirect("/admin/user-home-management")
             }).catch((err) => {
-                console.log("error found at curousel controller");
+                console.log("error found at carousel");
             })
         }
         catch (err) {
             next(err)
         }
     },
+    //VIEW COUPON MANAGEMENT PAGE
     viewCouponData: (req, res, next) => {
         try {
             productHelper.getCoupons((data) => {
@@ -157,29 +156,27 @@ module.exports = {
             next(err)
         }
     },
+    //ADD COUPON DATA
     addCoupon: (req, res, next) => {
         try {
-            console.log(req.body, 'kkkkkkkkk');
             adminHelper.addCoupon(req.body, async (err, response) => {
                 if (err) {
                     console.log("error")
                 } else {
                     if (response) {
-                        console.log('reached', response);
                         res.render("admin/coupon-management", { admin: true })
                     }
                     else {
-                        console.log('coupen exist')
                         res.render("admin/coupon-management", { admin: true })
                     }
                 }
             })
-
         }
         catch (err) {
             next(err)
         }
     },
+    //DELETE SINGLE COUPON
     deleteCoupon: (req, res, next) => {
         try {
             id = req.body.id
@@ -191,6 +188,7 @@ module.exports = {
             next(err)
         }
     },
+    //PAGE VIEW OF EDIT COUPON DATA
     editCoupon: (req, res, next) => {
         try {
             id = req.params._id
@@ -202,12 +200,13 @@ module.exports = {
             next(err)
         }
     },
+    //EDIT COUPON DATA
     editCouponData: (req, res, next) => {
         try {
             id = req.params._id
             data = req.body
             productHelper.updateCoupon(id, data, (response) => {
-                res.redirect('/admin/coupen')
+                res.redirect('/admin/coupon-management')
             })
         }
         catch (err) {

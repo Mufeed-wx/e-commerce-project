@@ -1,6 +1,7 @@
 var session = require('express-session');
 let productHelper = require('../../helpers/product-helpers');
-const userhelper = require('../../helpers/user-helper');
+const userHelper = require('../../helpers/user-helper');
+const productModal = require('../../models/product-model')
 
 module.exports = {
     userLogin: (req, res, next) => {
@@ -20,18 +21,18 @@ module.exports = {
             session = req.session;
             if (req.session.user) {
                 if (req.session.user.User_status) {
-                    productHelper.getproduct_data().then((product) => {
+                    productHelper.getProductData().then((product) => {
                         session.product_data = product;
-                        res.render('user/userhome', { session, user: true });
+                        res.render('user/home', { session, user: true });
                     });
                 } else {
                     req.session.user = false;
                     res.render('error/error500')
                 }
             } else {
-                productHelper.getproduct_data().then((product) => {
+                productHelper.getProductData().then((product) => {
                     session.product_data = product;
-                    res.render('user/userhome', { session, user: true });
+                    res.render('user/home', { session, user: true });
                 });
             }
         }
@@ -42,14 +43,14 @@ module.exports = {
     },
     verificationUserLogin: (req, res, next) => {
         try {
-            userhelper.userlogin(req.body).then((response) => {
+            userHelper.login(req.body).then((response) => {
                 if (response.status) {
                     session = req.session
                     req.session.user = response.user;
                     res.json({ msg: 'success' });
                 } else {
                     console.log('failed login');
-                    res.json({ msg: 'usernotfound' });
+                    res.json({ msg: 'userNotFound' });
                 }
             });
         }
@@ -63,7 +64,6 @@ module.exports = {
                 res.redirect('/');
             } else {
                 session = req.session;
-                console.log(session.userAlreadyExist);
                 res.render('user/signup', { session, user: true });
             }
         }
@@ -74,15 +74,13 @@ module.exports = {
     },
     signupUserData: (req, res, next) => {
         try {
-            console.log("sdsadas", req.body);
-            userhelper.usersignup(req.body).then((state) => {
+            userHelper.signup(req.body).then((state) => {
                 if (state.exist) {
                     session = req.session;
                     req.session.NumberAlreadyExist = true;
-                    console.log('number already exist');
                     res.render('user/signup', { session, user: true });
                 } else {
-                    req.session.numberexist = false;
+                    req.session.NumberAlreadyExist = false;
                     req.session.user = state.user;
                     res.redirect('/');
                 }
@@ -94,10 +92,26 @@ module.exports = {
     },
     logout: (req, res) => {
         try {
-            console.log("reached");
             req.session.user = false;
-            console.log(req.session.user, 'kkkkkk');
             res.json({ msg: 'success' });
+        }
+        catch (err) {
+            next(err)
+        }
+    },
+    singleProduct: async (req, res, next) => {
+        try {
+            id = req.params._id;
+            var data = await productModal.findById({ _id: id }).populate('Category_Name').populate('Sub_Category_Name').lean()
+            res.render('user/single-product', { user: true, session, data })
+        }
+        catch (err) {
+            next(err)
+        }
+    },
+    contactView: async (req, res, next) => {
+        try {
+            res.render('user/contact', { user: true, session })
         }
         catch (err) {
             next(err)
