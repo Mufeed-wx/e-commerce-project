@@ -43,24 +43,34 @@ function goDoSomething(identifier) {
 function deleteWhishlist(value) {
   var data = $(value).data('id');
   console.log("hsagda", data);
+  Swal.fire({
+    text: "Remove this item",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, remove it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/wishlist',
+        method: 'delete',
+        dataType: 'json',
+        data: { 'id': data },
+        success: function (response) {
+          if (response.msg == 'success') {
+            $("#whishlist").load(location.href + " #whishlist");
 
-  $.ajax({
-    url: '/wishlist',
-    method: 'delete',
-    dataType: 'json',
-    data: { 'id': data },
-    success: function (response) {
-      if (response.msg == 'success') {
-        $("#whishlist").load(location.href + " #whishlist");
-
-      } else {
-        alert('data not get deleted');
-      }
-    },
-    error: function (response) {
-      console.log('error whishlist');
+          } else {
+            alert('data not get deleted');
+          }
+        },
+        error: function (response) {
+          console.log('error whishlist');
+        }
+      });
     }
-  });
+  })
 }
 
 function shoppingCart(value) {
@@ -288,23 +298,35 @@ function razorpayPayment(order) {
 function deletecart(value) {
   var data = $(value).data('id');
 
-  $.ajax({
-    url: '/cart',
-    method: 'delete',
-    dataType: 'json',
-    data: { 'id': data },
-    success: function (response) {
-      if (response.msg == 'success') {
-        $("#sub-total").load(location.href + " #sub-total");
+  Swal.fire({
+    text: "You want to remove this item",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, remove it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
 
-      } else {
-        alert('data not get deleted');
-      }
-    },
-    error: function (response) {
-      alert('server error')
+      $.ajax({
+        url: '/cart',
+        method: 'delete',
+        dataType: 'json',
+        data: { 'id': data },
+        success: function (response) {
+          if (response.msg == 'success') {
+            $("#sub-total").load(location.href + " #sub-total");
+
+          } else {
+            alert('data not get deleted');
+          }
+        },
+        error: function (response) {
+          alert('server error')
+        }
+      });
     }
-  });
+  })
 }
 
 

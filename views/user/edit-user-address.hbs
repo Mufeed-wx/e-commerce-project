@@ -4,7 +4,7 @@
       <div class='col col-lg-12 mt-3 mb-5 mb-lg-0'>
         <div class='card mb-3' style='border-radius: .5rem;padding: 40px 38px;border-radius: 0px;'>
           <div class='row g-0'>
-            <form action="/edituseraddress/{{address._id}}" method="post">
+            <form action="/edit-user-address/{{address._id}}" method="post">
               <div class='col-md-12'>
                 <div class='card-body pl-2'>
                   <h6>Add Address</h6>
@@ -17,37 +17,42 @@
                     </div>
                     <div class='col-6 mb-3'>
                       <h6>Mobile Number</h6>
-                      <input type="number" name="mobile_number" value="{{address.mobile_number}}" onkeyup="validatePhone()" id="phone">
+                      <input type="number" name="mobile_number" value="{{address.mobile_number}}"
+                        onkeyup="validatePhone()" id="phone">
                       <span id="phone-error" class="text-danger font-weight-bold"></span>
                     </div>
                     <div class='col-6 mb-3'>
                       <h6>Pin Code</h6>
-                      <input type="text" name="pincode" value="{{address.pincode}}"  id="pincode" onkeyup="validatePincode()">
+                      <input type="text" name="pincode" value="{{address.pincode}}" id="pincode"
+                        onkeyup="validatePincode()">
                       <span id="pin-error" class="text-danger font-weight-bold"></span>
                     </div>
                     <div class='col-6 mb-3'>
                       <h6>Area, Street, Sector, Village</h6>
-                      <input type="text" name="street" value="{{address.street}}" id="street" onkeyup="validateStreet()" >
+                      <input type="text" name="street" value="{{address.street}}" id="street"
+                        onkeyup="validateStreet()">
                       <span id="street-error" class="text-danger font-weight-bold"></span>
                     </div>
                     <div class='col-6 mb-3'>
                       <h6>Landmark</h6>
-                      <input type="text" name="landmark" value="{{address.landmark}}" id="landmark"  onkeyup="validateLandmark()" >
+                      <input type="text" name="landmark" value="{{address.landmark}}" id="landmark"
+                        onkeyup="validateLandmark()">
                       <span id="landmark-error" class="text-danger font-weight-bold"></span>
                     </div>
                     <div class='col-6 mb-3'>
                       <h6>Town/City</h6>
-                      <input type="text" name="city" value="{{address.city}}" id="city" onkeyup="validateCity()" >
+                      <input type="text" name="city" value="{{address.city}}" id="city" onkeyup="validateCity()">
                       <span id="city-error" class="text-danger font-weight-bold"></span>
                     </div>
                     <div class='col-6 mb-3'>
                       <h6>Country</h6>
-                      <input type="text" name="country" value="{{address.country}}"  id="country"  onkeyup="validateCountry()" >
+                      <input type="text" name="country" value="{{address.country}}" id="country"
+                        onkeyup="validateCountry()">
                       <span id="country-error" class="text-danger font-weight-bold"></span>
                     </div>
                     <div class='col-6 mb-3'>
                       <h6>State</h6>
-                      <input type="text" name="state" value="{{address.state}}" id="state" onkeyup="validateState()" >
+                      <input type="text" name="state" value="{{address.state}}" id="state" onkeyup="validateState()">
                       <span id="state-error" class="text-danger font-weight-bold"></span>
                     </div>
                   </div>
