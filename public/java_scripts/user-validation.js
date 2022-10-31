@@ -170,7 +170,7 @@ function validatePasswordsign() {
         passError.innerHTML = '**Password is required';
         return false
     }
-    if (pass.length <= 3) {
+    if (pass.length <= 7) {
         passError.innerHTML = '**Minimum password length must be 8';
         return false
     }
